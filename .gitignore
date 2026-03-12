@@ -1,0 +1,12 @@
+# IntelliJ
+.idea/
+*.iml
+
+# Greenfoot / Java
+*.class
+*.ctxt
+bluej.pkg
+
+# OS files
+.DS_Store
+Thumbs.db
