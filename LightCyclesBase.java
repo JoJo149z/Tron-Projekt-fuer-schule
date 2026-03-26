@@ -1,15 +1,15 @@
 import greenfoot.Actor;
 import greenfoot.Greenfoot;
 
-import java.awt.*;
-
 public class LightCyclesBase extends Actor {
 
     int speed;
+    String farbe;
 
-    LightCyclesBase(int speed) {
+    LightCyclesBase(int speed,  String farbe) {
         setStartDirection("down");
-        setImageColor("Gelb");
+        setImage(("Lightcycles"+farbe+".png"));
+        this.farbe = farbe;
         this.speed = speed;
     }
 
@@ -23,36 +23,31 @@ public class LightCyclesBase extends Actor {
      * as left, down, right, up
      */
     public void setStartDirection(String direction) {
-        if  (direction.equals("left")) {
-            setRotation(270);
-        } else if (direction.equals("right")) {
-            setRotation(90);
-        }  else if (direction.equals("up")) {
-            setRotation(0);
-        }  else if (direction.equals("down")) {
-            setRotation(180);
+        switch (direction) {
+            case "left":
+                setRotation(180);
+            case "right":
+                setRotation(0);
+            case "up":
+                setRotation(270);
+            case "down":
+                setRotation(90);
         }
-    }
-
-    /**
-     *
-     * @param Color Gelb oder Blau
-     */
-    public void setImageColor(String Color) {
-        setImage(("Lightcycles"+Color+".png"));
     }
 
     public void handelMovement() {
-        if (Greenfoot.isKeyDown("a")){
-                setRotation(180);
-        } else  if (Greenfoot.isKeyDown("d")){
-            setRotation(0);
-        }   else if (Greenfoot.isKeyDown("w")){
-            setRotation(270);
-        }   else if (Greenfoot.isKeyDown("s")){
-            setRotation(90);
+
+        String key = Greenfoot.getKey();
+        if (key != null) {
+            if ("a".equals(key)) {
+                turn(-90);
+            }
+            if ("d".equals(key)) {
+                turn(90);
+            }
         }
-        move(this.speed);
+        move(speed);
+        getWorld().addObject(new ImageObject("LightcyclesTrail"+farbe+".png"), getX(), getY());
     }
 
 
