@@ -50,5 +50,7 @@ public class LightCyclesBase extends Actor {
         getWorld().addObject(new ImageObject("LightcyclesTrail"+farbe+".png"), getX(), getY());
     }
 
+    public void checkCollision() {
 
+    }
 }
