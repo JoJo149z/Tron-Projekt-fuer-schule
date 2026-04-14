@@ -1,22 +1,20 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class MyWorld here.
+ * Write a description of class GridBugs here.
  * 
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class MenuWorld extends World
+public class GridBugs extends World
 {
 
     /**
-     * Constructor for objects of class MyWorld.
+     * Constructor for objects of class GridBugs.
      * 
      */
-    public MenuWorld()
+    public GridBugs()
     {    
         super(326,349, 1); 
-        
-        addObject(new ButtonGridBugs(), 150,150);
     }
 }
