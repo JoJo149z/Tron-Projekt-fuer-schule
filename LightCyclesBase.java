@@ -36,7 +36,7 @@ public class LightCyclesBase extends Actor {
     }
 
     public void handelMovement() {
-
+        checkCollision();
         String key = Greenfoot.getKey();
         if (key != null) {
             if ("a".equals(key)) {
@@ -51,6 +51,9 @@ public class LightCyclesBase extends Actor {
     }
 
     public void checkCollision() {
-
+        if (isTouching(ImageObject.class)){
+            setImage(("LightcyclesExplosion1.png"));
+            setImage(("LightcyclesExplosion2.png"));
+        }
     }
 }
