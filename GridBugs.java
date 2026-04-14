@@ -15,6 +15,8 @@ public class GridBugs extends World
      */
     public GridBugs()
     {    
-        super(326,349, 1); 
+        super(326,349, 1);
+        
+        addObject(new GridBugsPlayer(), 163, 290);
     }
 }
