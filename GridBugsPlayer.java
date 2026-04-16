@@ -23,5 +23,22 @@ public class GridBugsPlayer extends Actor
         } else if(Greenfoot.isKeyDown("y")){
             setLocation(getX(), getY()+1);
         }
+        
+        if(Greenfoot.isKeyDown("right")){
+            shoot(0);
+        }
+        if(Greenfoot.isKeyDown("down")){
+            shoot(90);
+        }
+        if(Greenfoot.isKeyDown("left")){
+            shoot(180);
+        }
+        if(Greenfoot.isKeyDown("up")){
+            shoot(270);
+        }
+    }
+    
+    public void shoot(int rotation){
+        getWorld().addObject(new GridBugsKugel(rotation), getX()-10, getY()-5);
     }
 }
