@@ -16,8 +16,8 @@ public class LightCycles extends World
     public LightCycles()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
-        super(326,349, 1); 
-        setPaintOrder(LightCyclesBase.class, ImageObject.class);
+        super(326,349, 1);
+        //setPaintOrder(LightCyclesBase.class, ImageObject.class);
         prepare();
     }
     /**
@@ -26,8 +26,7 @@ public class LightCycles extends World
      */
     private void prepare()
     {
-        LightCyclesBase lightCyclesBase = new LightCyclesBase(1, "Blau");
+        LightCyclesBase lightCyclesBase = new LightCyclesBase(1, "Blau","up");
         addObject(lightCyclesBase,154,273);
-        lightCyclesBase.setStartDirection("up");
     }
 }
