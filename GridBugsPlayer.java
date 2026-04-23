@@ -12,6 +12,12 @@ public class GridBugsPlayer extends Actor
      * Act - do whatever the GridBugsPlayer wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
+    
+    boolean stillRight = false;
+    boolean stillDown = false;
+    boolean stillUp = false;
+    boolean stillLeft = false;
+    
     public void act()
     {
         if(Greenfoot.isKeyDown("w")){
@@ -25,16 +31,36 @@ public class GridBugsPlayer extends Actor
         }
         
         if(Greenfoot.isKeyDown("right")){
-            shoot(0);
+            if(!stillRight){
+                shoot(0);
+                stillRight = true;
+            }
+        } else{
+            stillRight = false;
         }
         if(Greenfoot.isKeyDown("down")){
-            shoot(90);
+            if(!stillDown){
+                shoot(90);
+                stillDown = true;
+            }
+        } else{
+            stillDown = false;
         }
         if(Greenfoot.isKeyDown("left")){
-            shoot(180);
+            if(!stillLeft){
+                shoot(180);
+                stillLeft = true;
+            }
+        } else{
+            stillLeft = false;
         }
         if(Greenfoot.isKeyDown("up")){
-            shoot(270);
+            if(!stillUp){
+                shoot(270);
+                stillUp = true;
+            }
+        } else{
+            stillUp = false;
         }
     }
     
