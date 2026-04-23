@@ -10,7 +10,7 @@ public class LightCyclesPlayer extends LightCyclesBase
 {
     /**
      *
-     * @param speed
+     * @param speed             != 0
      * @param farbe             Gelb/Blau
      * @param setStartDirection left, up, down, right
      */
@@ -18,12 +18,20 @@ public class LightCyclesPlayer extends LightCyclesBase
         super(speed, farbe, setStartDirection);
     }
 
-    /**
-     * Act - do whatever the LightCyclesPlayer wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
-    public void act()
-    {
-        // Add your action code here.
+
+    @Override
+    public void handelMovement(){
+        checkMoveCollision();
+        String key = Greenfoot.getKey();
+        if (key != null) {
+            if ("a".equals(key)) {
+                turn(-90);
+            }
+            if ("d".equals(key)) {
+                turn(90);
+            }
+        }
+        move(speed);
+
     }
 }

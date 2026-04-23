@@ -8,19 +8,20 @@ public class LightCyclesBase extends Actor {
 
     /**
      *
-     * @param speed
-     * @param farbe Gelb/Blau
+     * @param speed             != 0
+     * @param farbe             Gelb/Blau
      * @param setStartDirection left, up, down, right
      */
-    LightCyclesBase(int speed,  String farbe, String setStartDirection) {
+    LightCyclesBase(int speed, String farbe, String setStartDirection) {
         setStartDirection(setStartDirection);
-        setImage(("Lightcycles"+farbe+".png"));
         this.farbe = farbe;
         this.speed = speed;
     }
 
     public void act() {
+        checkMoveCollision();
         handelMovement();
+        getWorld().addObject(new ImageObject("LightcyclesTrail"+farbe+".png"), getX(), getY());
     }
 
     /**
@@ -46,18 +47,7 @@ public class LightCyclesBase extends Actor {
     }
 
     public void handelMovement() {
-        checkMoveCollision();
-        String key = Greenfoot.getKey();
-        if (key != null) {
-            if ("a".equals(key)) {
-                turn(-90);
-            }
-            if ("d".equals(key)) {
-                turn(90);
-            }
-        }
         move(speed);
-        getWorld().addObject(new ImageObject("LightcyclesTrail"+farbe+".png"), getX(), getY());
     }
 
     public void checkMoveCollision() {

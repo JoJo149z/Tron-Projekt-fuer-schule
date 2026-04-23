@@ -15,18 +15,21 @@ public class LightCycles extends World
      */
     public LightCycles()
     {    
-        // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
+
         super(326,349, 1);
-        //setPaintOrder(LightCyclesBase.class, ImageObject.class);
+        setPaintOrder(LightCyclesBase.class, ImageObject.class);
         prepare();
     }
+    
     /**
      * Prepare the world for the start of the program.
      * That is: create the initial objects and add them to the world.
      */
     private void prepare()
     {
-        LightCyclesBase lightCyclesBase = new LightCyclesBase(1, "Blau","up");
-        addObject(lightCyclesBase,154,273);
+        LightCyclesPlayer lightCyclesPlayer = new LightCyclesPlayer(1, "Blau","up");
+        addObject(lightCyclesPlayer,154,273);
+        LightCyclesEnemy lightCyclesEnemy = new LightCyclesEnemy(1, "Gelb", "down");
+        addObject(lightCyclesEnemy,154,100);
     }
 }
