@@ -1,26 +1,31 @@
 import greenfoot.Actor;
-import greenfoot.Greenfoot;
 
 public class LightCyclesBase extends Actor {
 
     int speed;
     String farbe;
+    boolean isDead;
 
     /**
      *
-     * @param speed
-     * @param farbe Gelb/Blau
+     * @param speed             != 0
+     * @param farbe             Gelb/Blau
      * @param setStartDirection left, up, down, right
      */
-    LightCyclesBase(int speed,  String farbe, String setStartDirection) {
+    LightCyclesBase(int speed, String farbe, String setStartDirection) {
         setStartDirection(setStartDirection);
-        setImage(("Lightcycles"+farbe+".png"));
         this.farbe = farbe;
         this.speed = speed;
+        isDead = false;
     }
 
     public void act() {
+        if (moveCollision()){
+            death();
+        }
         handelMovement();
+        move(speed);
+        getWorld().addObject(new ImageObject("LightCyclesTrail"+farbe+".png"), getX(), getY());
     }
 
     /**
@@ -46,21 +51,17 @@ public class LightCyclesBase extends Actor {
     }
 
     public void handelMovement() {
-        checkMoveCollision();
-        String key = Greenfoot.getKey();
-        if (key != null) {
-            if ("a".equals(key)) {
-                turn(-90);
-            }
-            if ("d".equals(key)) {
-                turn(90);
-            }
-        }
-        move(speed);
-        getWorld().addObject(new ImageObject("LightcyclesTrail"+farbe+".png"), getX(), getY());
+
     }
 
-    public void checkMoveCollision() {
+    public void death() {
+            isDead = true;
+            speed = 0;
+            setImage(("LightcyclesExplosion1.png"));
+            setImage(("LightcyclesExplosion2.png"));
+
+    }
+    public Boolean moveCollision(){
         int x = 0;
         int y = 0;
         int Rotation = getRotation();
@@ -78,10 +79,6 @@ public class LightCyclesBase extends Actor {
                 x = x + 15;
                 break;
         }
-        if (getOneObjectAtOffset(x,y,ImageObject.class)!=null){
-            speed = 0;
-            setImage(("LightcyclesExplosion1.png"));
-            setImage(("LightcyclesExplosion2.png"));
-        }
+        return getOneObjectAtOffset(x, y, ImageObject.class) != null;
     }
 }
