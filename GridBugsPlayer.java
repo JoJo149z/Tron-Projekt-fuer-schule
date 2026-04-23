@@ -18,12 +18,39 @@ public class GridBugsPlayer extends Actor
     boolean stillUp = false;
     boolean stillLeft = false;
     
+    int leben = 100;
+    
+    int timer = 0;
+    
     public void act()
     {
         getMovement();
         
         getShooting();
         
+        if(isTouching(GridBugsSpinne.class)){
+            leben -= 10;
+        }
+        
+        if(leben==0 && timer==0){
+            setImage("Explosion Status 1.png");
+            timer++;
+        }
+        
+        else if(timer%3!=0){
+            timer++;
+        }
+        else if(timer==3){
+            setImage("Explosion Status 2.png");
+            timer++;
+        }
+        else if(timer==6){
+            setImage("Explosion Status 3.png");
+            timer++;
+        }
+        else if(timer==9){
+            getWorld().removeObject(this);
+        }        
     }
     
     public void getMovement(){
@@ -37,6 +64,7 @@ public class GridBugsPlayer extends Actor
         } else if(Greenfoot.isKeyDown("y")){
             setLocation(getX(), getY()+1);
         }
+        
     }
     
     public void getShooting(){

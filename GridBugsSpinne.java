@@ -21,6 +21,10 @@ public class GridBugsSpinne extends Actor
             timer++;
         }
         
+        if(isTouching(GridBugsPlayer.class)){
+            move(-10);
+        }
+        
         if(timer != 0){
             timer++;
         }
@@ -28,5 +32,11 @@ public class GridBugsSpinne extends Actor
         if(timer == 6){
             getWorld().removeObject(this);
         }
+        
+        getMoving();
+    }
+    
+    public void getMoving(){
+        
     }
 }

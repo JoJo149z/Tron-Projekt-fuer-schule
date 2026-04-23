@@ -13,6 +13,10 @@ public class GridBugs extends World
      * Constructor for objects of class GridBugs.
      * 
      */
+    
+    int playerX;
+    int playerY;
+    
     public GridBugs(int level)
     {    
         super(326,349, 1);
@@ -31,6 +35,8 @@ public class GridBugs extends World
     
     public void addPlayer(){
         addObject(new GridBugsPlayer(), 163, 290);
+        playerX = 163;
+        playerY = 290;
     }
     
     public void addSpinne(int x, int y){

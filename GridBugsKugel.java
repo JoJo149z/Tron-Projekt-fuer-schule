@@ -38,7 +38,7 @@ public class GridBugsKugel extends Actor
             timer++;
         }
         else if(timer==3){
-            setImage("Explosion Status 3.png");
+            setImage("Explosion Status 2.png");
             timer++;
         }
         else if(timer==6){
