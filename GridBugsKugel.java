@@ -15,6 +15,8 @@ public class GridBugsKugel extends Actor
     int rotation;
     int speed = 4;
     
+    int timer = 0;
+    
     public GridBugsKugel(int rotation){
         this.rotation = rotation;
         setRotation(rotation);
@@ -24,12 +26,28 @@ public class GridBugsKugel extends Actor
     {
         move(speed);
         
-        if(isTouching(GridBugsSpinne.class)){
-            getWorld().removeObject(this);
-        }        
-        
         if(isAtEdge()){
             getWorld().removeObject(this);
+            Greenfoot.start();
         }
+        else if(isTouching(GridBugsSpinne.class) && timer==0){
+            setImage("Explosion Status 1.png");
+            timer++;
+        }
+        else if(timer%3!=0){
+            timer++;
+        }
+        else if(timer==3){
+            setImage("Explosion Status 3.png");
+            timer++;
+        }
+        else if(timer==6){
+            setImage("Explosion Status 3.png");
+            timer++;
+        }
+        else if(timer==9){
+            getWorld().removeObject(this);
+        }
+        
     }
 }
