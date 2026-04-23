@@ -20,6 +20,14 @@ public class GridBugsPlayer extends Actor
     
     public void act()
     {
+        getMovement();
+        
+        getShooting();
+        
+    }
+    
+    public void getMovement(){
+        // Steuerung zur Bewegung
         if(Greenfoot.isKeyDown("w")){
             setLocation(getX(), getY()-1);
         } else if(Greenfoot.isKeyDown("a")){
@@ -29,7 +37,10 @@ public class GridBugsPlayer extends Actor
         } else if(Greenfoot.isKeyDown("y")){
             setLocation(getX(), getY()+1);
         }
-        
+    }
+    
+    public void getShooting(){
+        // Steuerung zum Schießen
         if(Greenfoot.isKeyDown("right")){
             if(!stillRight){
                 shoot(0);
