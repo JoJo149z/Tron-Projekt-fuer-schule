@@ -1,10 +1,10 @@
 import greenfoot.Actor;
-import greenfoot.Greenfoot;
 
 public class LightCyclesBase extends Actor {
 
     int speed;
     String farbe;
+    boolean isDead;
 
     /**
      *
@@ -16,12 +16,16 @@ public class LightCyclesBase extends Actor {
         setStartDirection(setStartDirection);
         this.farbe = farbe;
         this.speed = speed;
+        isDead = false;
     }
 
     public void act() {
-        checkMoveCollision();
+        if (moveCollision()){
+            death();
+        }
         handelMovement();
-        getWorld().addObject(new ImageObject("LightcyclesTrail"+farbe+".png"), getX(), getY());
+        move(speed);
+        getWorld().addObject(new ImageObject("LightCyclesTrail"+farbe+".png"), getX(), getY());
     }
 
     /**
@@ -47,10 +51,17 @@ public class LightCyclesBase extends Actor {
     }
 
     public void handelMovement() {
-        move(speed);
+
     }
 
-    public void checkMoveCollision() {
+    public void death() {
+            isDead = true;
+            speed = 0;
+            setImage(("LightcyclesExplosion1.png"));
+            setImage(("LightcyclesExplosion2.png"));
+
+    }
+    public Boolean moveCollision(){
         int x = 0;
         int y = 0;
         int Rotation = getRotation();
@@ -68,10 +79,6 @@ public class LightCyclesBase extends Actor {
                 x = x + 15;
                 break;
         }
-        if (getOneObjectAtOffset(x,y,ImageObject.class)!=null){
-            speed = 0;
-            setImage(("LightcyclesExplosion1.png"));
-            setImage(("LightcyclesExplosion2.png"));
-        }
+        return getOneObjectAtOffset(x, y, ImageObject.class) != null;
     }
 }

@@ -1,4 +1,4 @@
-import greenfoot.*;
+
 
 /**
  * Write a description of class LightCyclesEnemy here.
@@ -16,12 +16,5 @@ public class LightCyclesEnemy extends LightCyclesBase
      */
     LightCyclesEnemy(int speed, String farbe, String setStartDirection) {
         super(speed, farbe, setStartDirection);
-    }
-
-
-    @Override
-    public void handelMovement(){
-        move(speed);
-
     }
 }

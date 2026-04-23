@@ -21,17 +21,16 @@ public class LightCyclesPlayer extends LightCyclesBase
 
     @Override
     public void handelMovement(){
-        checkMoveCollision();
-        String key = Greenfoot.getKey();
-        if (key != null) {
-            if ("a".equals(key)) {
-                turn(-90);
-            }
-            if ("d".equals(key)) {
-                turn(90);
+        if(!isDead){
+            String key = Greenfoot.getKey();
+            if (key != null) {
+                if ("a".equals(key)) {
+                    turn(-90);
+                }
+                if ("d".equals(key)) {
+                    turn(90);
+                }
             }
         }
-        move(speed);
-
     }
 }
