@@ -6,6 +6,12 @@ public class LightCyclesBase extends Actor {
     int speed;
     String farbe;
 
+    /**
+     *
+     * @param speed
+     * @param farbe Gelb/Blau
+     * @param setStartDirection left, up, down, right
+     */
     LightCyclesBase(int speed,  String farbe, String setStartDirection) {
         setStartDirection(setStartDirection);
         setImage(("Lightcycles"+farbe+".png"));
