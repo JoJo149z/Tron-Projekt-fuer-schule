@@ -20,10 +20,11 @@ public class LightCyclesBase extends Actor {
     }
 
     public void act() {
+        handelMovement();
         if (moveCollision()){
             death();
+            return;
         }
-        handelMovement();
         move(speed);
         getWorld().addObject(new ImageObject("LightCyclesTrail"+farbe+".png"), getX(), getY());
     }
@@ -78,6 +79,9 @@ public class LightCyclesBase extends Actor {
             case 0:
                 x = x + 15;
                 break;
+        }
+        if (getX()<=28 || getX() >= 300 || getY()<=73 || getY() >= 320) {
+            return true;
         }
         return getOneObjectAtOffset(x, y, ImageObject.class) != null;
     }
