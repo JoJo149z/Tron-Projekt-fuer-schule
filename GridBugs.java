@@ -14,8 +14,8 @@ public class GridBugs extends World
      * 
      */
     
-    int playerX;
-    int playerY;
+    public int playerX;
+    public int playerY;
     
     public GridBugs(int level)
     {    
@@ -34,9 +34,9 @@ public class GridBugs extends World
     }
     
     public void addPlayer(){
-        addObject(new GridBugsPlayer(), 163, 290);
         playerX = 163;
         playerY = 290;
+        addObject(new GridBugsPlayer(), playerX, playerY);
     }
     
     public void addSpinne(int x, int y){

@@ -24,6 +24,8 @@ public class GridBugsPlayer extends Actor
     
     public void act()
     {
+        getWorldOfType(GridBugs.class).playerX = getX();
+        getWorldOfType(GridBugs.class).playerY = getY();
         getMovement();
         
         getShooting();
@@ -50,6 +52,7 @@ public class GridBugsPlayer extends Actor
         }
         else if(timer==9){
             getWorld().removeObject(this);
+            return;
         }        
     }
     

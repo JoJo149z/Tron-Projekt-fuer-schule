@@ -14,6 +14,7 @@ public class GridBugsSpinne extends Actor
      */
     
     int timer = 0;
+    int speed = 1;
     
     public void act()
     {
@@ -37,6 +38,14 @@ public class GridBugsSpinne extends Actor
     }
     
     public void getMoving(){
+        int playerX = getWorldOfType(GridBugs.class).playerX;
+        int playerY = getWorldOfType(GridBugs.class).playerY;
         
+        int difX = playerX-getX();
+        int difY = playerX-getY();
+        
+        if(difX>difY && difX>0){
+            setLocation(getX()+speed, getY());
+        }
     }
 }
