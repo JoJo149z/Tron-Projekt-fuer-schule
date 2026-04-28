@@ -16,7 +16,7 @@ public class MenuWorld extends World
     public MenuWorld()
     {    
         super(326,349, 1); 
-        
+
         addObject(new ButtonGridBugs(), 150,150);
     }
 }
