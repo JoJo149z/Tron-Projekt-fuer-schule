@@ -18,7 +18,7 @@ public class GridBugsPlayer extends Actor
     boolean stillUp = false;
     boolean stillLeft = false;
     
-    int leben = 100;
+    int leben = 200;
     
     int timer = 0;
     
@@ -52,7 +52,6 @@ public class GridBugsPlayer extends Actor
         }
         else if(timer==9){
             getWorld().removeObject(this);
-            return;
         }        
     }
     

@@ -14,16 +14,18 @@ public class GridBugsSpinne extends Actor
      */
     
     int timer = 0;
+    int movingTimer = 0;
     int speed = 1;
     
     public void act()
     {
-        if(isTouching(GridBugsKugel.class)){
-            timer++;
+        movingTimer++;
+        if(movingTimer%2==0){
+            getMoving();
         }
         
-        if(isTouching(GridBugsPlayer.class)){
-            move(-10);
+        if(isTouching(GridBugsKugel.class)){
+            timer++;
         }
         
         if(timer != 0){
@@ -33,8 +35,6 @@ public class GridBugsSpinne extends Actor
         if(timer == 6){
             getWorld().removeObject(this);
         }
-        
-        getMoving();
     }
     
     public void getMoving(){
@@ -42,10 +42,64 @@ public class GridBugsSpinne extends Actor
         int playerY = getWorldOfType(GridBugs.class).playerY;
         
         int difX = playerX-getX();
-        int difY = playerX-getY();
+        int difY = playerY-getY();
         
-        if(difX>difY && difX>0){
-            setLocation(getX()+speed, getY());
+        if(!(getX()>95 && getX()<231 && getY()>75 && getY()<205)){
+            if(isTouching(GridBugsPlayer.class)){
+                if(difX<0){
+                    if(difY<0){
+                        setLocation(getX()+20, getY()+20);
+                    } else{
+                        setLocation(getX()+20, getY()-20);
+                    }
+                } else {
+                    if(difY<0){
+                        setLocation(getX()-20, getY()+20);
+                    } else{
+                        setLocation(getX()-20, getY()-20);
+                    }
+                }
+            }
+            
+            if(difX>difY){
+                if(difX>0){
+                    setLocation(getX()+speed, getY());
+                } else {
+                    setLocation(getX(), getY()-speed);
+                }
+            } else {
+                if(difY>0){
+                    setLocation(getX(), getY()+speed);
+                } else {
+                    setLocation(getX()-speed, getY());
+                }
+            }
+        } else{
+            if(getX()<100){
+                if(getY()>140){
+                    setLocation(getX(), getY()+speed);
+                } else{
+                    setLocation(getX(), getY()-speed);
+                }
+            } else if(getX()>226){
+                if(getY()>140){
+                    setLocation(getX(), getY()+speed);
+                } else{
+                    setLocation(getX(), getY()-speed);
+                }
+            } else if(getY()<80){
+                if(getX()>163){
+                    setLocation(getX(), getY()+speed);
+                } else{
+                    setLocation(getX(), getY()-speed);
+                }
+            } else if(getY()>200){
+                if(difX>163){
+                    setLocation(getX()+speed, getY());
+                } else{
+                    setLocation(getX()-speed, getY());
+                }
+            }
         }
     }
 }
