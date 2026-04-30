@@ -5,16 +5,18 @@ public class LightCyclesBase extends Actor {
     int speed;
     String farbe;
     boolean isDead;
+    boolean isEnemy;
 
     /**
      *
      * @param speed             != 0
-     * @param farbe             Gelb/Blau
+     * @param isEnemy           true/false
      * @param setStartDirection left, up, down, right
      */
-    LightCyclesBase(int speed, String farbe, String setStartDirection) {
+    LightCyclesBase(int speed, boolean isEnemy, String setStartDirection) {
         setStartDirection(setStartDirection);
-        this.farbe = farbe;
+        this.farbe = isEnemy? "Gelb":"Blau";
+        this.isEnemy = isEnemy;
         this.speed = speed;
         isDead = false;
     }
@@ -51,13 +53,16 @@ public class LightCyclesBase extends Actor {
         }
     }
 
-    public void handelMovement() {
-
-    }
+    public void handelMovement() {}
 
     public void death() {
             isDead = true;
             speed = 0;
+            if (isEnemy) {
+                GameManager.addPunkte(1000);
+            } else {
+                GameManager.setPunkte(0);
+            }
             setImage(("LightcyclesExplosion1.png"));
             setImage(("LightcyclesExplosion2.png"));
 

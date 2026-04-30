@@ -27,14 +27,14 @@ public class LightCycles extends World
      */
     private void prepare()
     {
-        LightCyclesPlayer lightCyclesPlayer = new LightCyclesPlayer(1, "Blau","up");
+        LightCyclesPlayer lightCyclesPlayer = new LightCyclesPlayer(1, false,"up");
         addObject(lightCyclesPlayer,154,273);
-        LightCyclesEnemy lightCyclesEnemy = new LightCyclesEnemy(1, "Gelb", "down");
+        LightCyclesEnemy lightCyclesEnemy = new LightCyclesEnemy(1, true, "down");
         addObject(lightCyclesEnemy,154,100);
         if(difficulty > 1) {
-            LightCyclesEnemy lightCyclesEnemy2 = new LightCyclesEnemy(1, "Gelb", "down");
+            LightCyclesEnemy lightCyclesEnemy2 = new LightCyclesEnemy(1, true, "down");
             addObject(lightCyclesEnemy2, 244, 100);
-            LightCyclesEnemy lightCyclesEnemy3 = new LightCyclesEnemy(1, "Gelb", "down");
+            LightCyclesEnemy lightCyclesEnemy3 = new LightCyclesEnemy(1, true, "down");
             addObject(lightCyclesEnemy3, 82, 100);
         }
     }

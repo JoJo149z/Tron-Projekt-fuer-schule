@@ -11,11 +11,11 @@ public class LightCyclesPlayer extends LightCyclesBase
     /**
      *
      * @param speed             != 0
-     * @param farbe             Gelb/Blau
+     * @param isEnemy           true/false
      * @param setStartDirection left, up, down, right
      */
-    LightCyclesPlayer(int speed, String farbe, String setStartDirection) {
-        super(speed, farbe, setStartDirection);
+    LightCyclesPlayer(int speed, boolean isEnemy, String setStartDirection) {
+        super(speed, isEnemy, setStartDirection);
     }
 
 
