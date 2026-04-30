@@ -41,63 +41,75 @@ public class GridBugsSpinne extends Actor
         int playerX = getWorldOfType(GridBugs.class).playerX;
         int playerY = getWorldOfType(GridBugs.class).playerY;
         
-        int difX = playerX-getX();
-        int difY = playerY-getY();
+        int x = getX();
+        int y = getY();
         
-        if(!(getX()>95 && getX()<231 && getY()>75 && getY()<205)){
+        int difX = playerX-x;
+        int difY = playerY-y;
+        
+        if(!(x+20>100 && x-20<226 && y+20>75 && y-20<200)){
             if(isTouching(GridBugsPlayer.class)){
-                if(difX<0){
-                    if(difY<0){
-                        setLocation(getX()+20, getY()+20);
+                if(difX<=0){
+                    if(difY<=0){
+                        setLocation(x+100, y+100);
+                        System.out.println("--");
                     } else{
-                        setLocation(getX()+20, getY()-20);
+                        setLocation(x+100, y-100);
+                        System.out.println("-+");
                     }
                 } else {
-                    if(difY<0){
-                        setLocation(getX()-20, getY()+20);
+                    if(difY<=0){
+                        setLocation(x-100, y+100);
+                        System.out.println("+-");
                     } else{
-                        setLocation(getX()-20, getY()-20);
+                        setLocation(x-100, y-100);
+                        System.out.println("++");
                     }
                 }
             }
-            
+        }
+        
+        x = getX();
+        y = getY();
+        
+        if(!(x+speed>100 && x-speed<226 && y+speed>75 && y-speed<200)){  // Falls nicht in nähe des Vierecks
             if(difX>difY){
                 if(difX>0){
-                    setLocation(getX()+speed, getY());
+                    setLocation(x+speed, y);
                 } else {
-                    setLocation(getX(), getY()-speed);
+                    setLocation(x, y-speed);
                 }
             } else {
                 if(difY>0){
-                    setLocation(getX(), getY()+speed);
+                    setLocation(x, y+speed);
                 } else {
-                    setLocation(getX()-speed, getY());
+                    setLocation(x-speed, y);
                 }
             }
-        } else{
-            if(getX()<100){
-                if(getY()>140){
-                    setLocation(getX(), getY()+speed);
+        } else { // Falls in der Nähe des Vierecks
+            if(x<100){
+                if(y>=140){
+                    setLocation(x, y+speed);
                 } else{
-                    setLocation(getX(), getY()-speed);
+                    setLocation(x, y-speed);
                 }
-            } else if(getX()>226){
-                if(getY()>140){
-                    setLocation(getX(), getY()+speed);
+            } else if(x>=226){
+                if(y>140){
+                    setLocation(x, y+speed);
                 } else{
-                    setLocation(getX(), getY()-speed);
+                    setLocation(x, y-speed);
                 }
-            } else if(getY()<80){
-                if(getX()>163){
-                    setLocation(getX(), getY()+speed);
+            } else if(y<=80){
+                if(x>163){
+                    setLocation(x, y+speed);
                 } else{
-                    setLocation(getX(), getY()-speed);
+                    setLocation(x, y-speed);
                 }
-            } else if(getY()>200){
+            } else if(y>=200){
                 if(difX>163){
-                    setLocation(getX()+speed, getY());
+                    setLocation(x+speed, y);
                 } else{
-                    setLocation(getX()-speed, getY());
+                    setLocation(x-speed, y);
                 }
             }
         }
