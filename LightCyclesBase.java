@@ -80,7 +80,7 @@ public class LightCyclesBase extends Actor {
                 x = x + 15;
                 break;
         }
-        if (getX()<=28 || getX() >= 300 || getY()<=73 || getY() >= 320) {
+        if (getX()+x<=10 || getX()+x >= 316 || getY()+y<=55 || getY()+y >= 340) {
             return true;
         }
         return getOneObjectAtOffset(x, y, ImageObject.class) != null;
