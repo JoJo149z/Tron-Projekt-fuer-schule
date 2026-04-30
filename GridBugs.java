@@ -17,6 +17,9 @@ public class GridBugs extends World
     public int playerX;
     public int playerY;
     
+    public int time;
+    public int timeTimer = 0;
+    
     public GridBugs(int level)
     {    
         super(326,349, 1);
@@ -30,6 +33,14 @@ public class GridBugs extends World
                 level = 1;
                 addSetupLevel1();
                 break;
+        }
+    }
+    
+    public void act(){
+        showText(Integer.toString(time), 163, 175);
+        timeTimer--;
+        if(timeTimer%6 == 0){
+            time--;                                     // Timer des Spielers verändert sich
         }
     }
     
@@ -48,5 +59,7 @@ public class GridBugs extends World
         addSpinne(80, 190);
         addSpinne(246, 190);
         addSpinne(296, 180);
+        
+        time = 100;
     }
 }

@@ -17,6 +17,8 @@ public class GridBugsPlayer extends Actor
     boolean stillDown = false;
     boolean stillUp = false;
     boolean stillLeft = false;
+
+    int speed = 1;
     
     int leben = 200;
     
@@ -57,14 +59,27 @@ public class GridBugsPlayer extends Actor
     
     public void getMovement(){
         // Steuerung zur Bewegung
+        int x = getX();
+        int y = getY();
         if(Greenfoot.isKeyDown("w")){
-            setLocation(getX(), getY()-1);
-        } else if(Greenfoot.isKeyDown("a")){
-            setLocation(getX()-1, getY());
-        } else if(Greenfoot.isKeyDown("d")){
-            setLocation(getX()+1, getY());
-        } else if(Greenfoot.isKeyDown("y")){
-            setLocation(getX(), getY()+1);
+            if(!(((y-speed < 230 && y-speed > 147) || (y-speed > 70 && y-speed < 113)) && x > 97 && x < 229)) {  // damit nicht im mittleren Kasten
+                setLocation(x, y-1);
+            }
+        }
+        if(Greenfoot.isKeyDown("y")){
+            if(!(((y+speed < 230 && y+speed > 147) || (y+speed > 70 && y+speed < 113)) && x > 97 && x < 229)) {  // damit nicht im mittleren Kasten
+                setLocation(x, y+1);
+            }
+        }
+        if(Greenfoot.isKeyDown("a")){
+            if(!(((y < 230 && y > 147) || (y > 70 && y < 113)) && x-speed > 97 && x-speed < 229)) {
+                setLocation(x-speed, y);
+            }
+        }
+        if(Greenfoot.isKeyDown("d")) {
+            if (!(((y < 230 && y > 147) || (y > 70 && y < 113)) && x + speed > 97 && x + speed < 229)) {
+                setLocation(x + speed, y);
+            }
         }
         
     }
