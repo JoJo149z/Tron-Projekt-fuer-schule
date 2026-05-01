@@ -10,8 +10,20 @@ public class GameManager extends Actor
 {
     static int punkte;
 
-    GameManager(){
+    /**
+     *
+     * @param testGame 0-nichts, 1-LightCycles, 2-GridBugs
+     */
+    GameManager(int testGame, int level){
         punkte = 0;
+        switch(testGame){
+            case 1:
+                Greenfoot.setWorld(new LightCycles(level));
+               break;
+            case 2:
+                Greenfoot.setWorld(new GridBugs(level));
+                break;
+        }
     }
     /**
      * Act - do whatever the GameManager wants to do. This method is called whenever

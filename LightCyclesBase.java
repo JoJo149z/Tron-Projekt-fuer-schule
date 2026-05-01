@@ -16,6 +16,7 @@ public class LightCyclesBase extends Actor {
     LightCyclesBase(int speed, boolean isEnemy, String setStartDirection) {
         setStartDirection(setStartDirection);
         this.farbe = isEnemy? "Gelb":"Blau";
+        setImage("Lightcycles"+farbe+".png");
         this.isEnemy = isEnemy;
         this.speed = speed;
         isDead = false;
