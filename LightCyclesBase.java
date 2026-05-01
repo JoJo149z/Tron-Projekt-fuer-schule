@@ -24,9 +24,8 @@ public class LightCyclesBase extends Actor {
 
     public void act() {
         handelMovement();
-        if (moveCollision()){
+        if (moveCollision() && speed>0){
             death();
-            return;
         }
         move(speed);
         getWorld().addObject(new ImageObject("LightCyclesTrail"+farbe+".png"), getX(), getY());
@@ -66,7 +65,6 @@ public class LightCyclesBase extends Actor {
             }
             setImage(("LightcyclesExplosion1.png"));
             setImage(("LightcyclesExplosion2.png"));
-
     }
     public Boolean moveCollision(){
         int x = 0;
