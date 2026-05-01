@@ -6,8 +6,7 @@ import greenfoot.Greenfoot;
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class LightCyclesEnemy extends LightCyclesBase
-{
+public class LightCyclesEnemy extends LightCyclesBase {
     /**
      *
      * @param speed             != 0
@@ -17,15 +16,23 @@ public class LightCyclesEnemy extends LightCyclesBase
     LightCyclesEnemy(int speed, Boolean isEnemy, String setStartDirection) {
         super(speed, isEnemy, setStartDirection);
     }
+
     @Override
     public void handelMovement() {
-        if (!isDead){
-            if (moveCollision()){
+        if (!isDead) {
+            if (moveCollision()) {
                 int i = Greenfoot.getRandomNumber(2);
-                if (i == 0) {
+                if (i == 0){
                     turn(90);
-                } else if (i == 1) {
+                }else if (i == 1){
                     turn(-90);
+                }
+                if (moveCollision()) {
+                    if (i == 0) {
+                        turn(-180);
+                    } else if (i == 1) {
+                        turn(180);
+                    }
                 }
             }
         }
