@@ -44,7 +44,7 @@ public class GridBugs extends World
     }
     
     public void act(){
-        showText(Integer.toString(time), 163, 175);
+        showText(Integer.toString(time), 163, 172);
         timeTimer--;
         if(timeTimer%6 == 0){
             time--;                                     // Timer des Spielers verändert sich
