@@ -15,6 +15,7 @@ public class GameManager extends Actor
      * @param testGame 0-nichts, 1-LightCycles, 2-GridBugs
      */
     GameManager(int testGame, int level){
+        setImage("null.png");
         punkte = 0;
         switch(testGame){
             case 1:
