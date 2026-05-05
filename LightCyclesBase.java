@@ -69,24 +69,31 @@ public class LightCyclesBase extends Actor {
     public Boolean moveCollision(){
         int x = 0;
         int y = 0;
-        int Rotation = getRotation();
-        switch (Rotation) {
+        int dx = 0;
+        int dy = 0;
+        switch (getRotation()) {
             case 90:
                 y = y + 15;
+                dy=1;
                 break;
             case 180:
                 x = x - 15;
+                dx = -1;
                 break;
             case 270:
                 y = y - 15;
+                dy=-1;
                 break;
             case 0:
                 x = x + 15;
+                dx = 1;
                 break;
         }
-        if (getX()+x<=10 || getX()+x >= 316 || getY()+y<=55 || getY()+y >= 340) {
-            return true;
+        for (int i = 0; i < 13; i++) {
+            if (getOneObjectAtOffset(x+i*dx, y-i*dy, ImageObject.class) != null) {
+                return true;
+            }
         }
-        return getOneObjectAtOffset(x, y, ImageObject.class) != null;
+        return getX() + x <= 10 || getX() + x >= 316 || getY() + y <= 55 || getY() + y >= 340;
     }
 }
