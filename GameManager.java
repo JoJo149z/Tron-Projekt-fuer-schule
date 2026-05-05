@@ -32,9 +32,12 @@ public class GameManager extends Actor
      */
     public void act()
     {
-        getWorld().showText(Integer.toString(punkte),20, 20);
+        
     }
 
+    public void showPunkte(int x, int y){
+        getWorld().showText(Integer.toString(punkte), x, y);
+    }
 
     public static void addPunkte(int change){
         punkte += change;
