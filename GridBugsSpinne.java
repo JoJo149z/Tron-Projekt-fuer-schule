@@ -1,5 +1,4 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-
 /**
  * Write a description of class GridBugsSpinne here.
  * 
@@ -16,6 +15,8 @@ public class GridBugsSpinne extends Actor
     int timer = 0;
     int movingTimer = 0;
     int speed = 1;
+    int backPushPlayer = 7; // wie stark eine Spinne von dem Player verschoben werden kann
+    int backPushSpider = 1; // wie stark eine Spinne von einer Spinne verschoben werden kann
     
     public void act()
     {
@@ -47,23 +48,40 @@ public class GridBugsSpinne extends Actor
         int difX = playerX-x;
         int difY = playerY-y;
         
-        if(!(x+20>100 && x-20<226 && y+20>75 && y-20<200)){
+        
+        // Spinne springt zurück, wenn sie einen Spieler berührt
+        if(!(x+backPushPlayer>100 && x-backPushPlayer<226 && y+backPushPlayer>75 && y-backPushPlayer<200)){
             if(isTouching(GridBugsPlayer.class)){
                 if(difX<=0){
                     if(difY<=0){
-                        setLocation(x+100, y+100);
-                        System.out.println("--");
+                        setLocation(x+backPushPlayer, y+backPushPlayer);
                     } else{
-                        setLocation(x+100, y-100);
-                        System.out.println("-+");
+                        setLocation(x+backPushPlayer, y-backPushPlayer);
                     }
                 } else {
                     if(difY<=0){
-                        setLocation(x-100, y+100);
-                        System.out.println("+-");
+                        setLocation(x-backPushPlayer, y+backPushPlayer);
                     } else{
-                        setLocation(x-100, y-100);
-                        System.out.println("++");
+                        setLocation(x-backPushPlayer, y-backPushPlayer);
+                    }
+                }
+            }
+        }
+        
+        x = getX();
+        y = getY();
+        if((movingTimer)%4==0){
+            if(!(x+backPushSpider>100 && x-backPushSpider<226 && y+backPushSpider>75 && y-backPushSpider<200)){
+                if(isTouching(GridBugsSpinne.class)){
+                    double randomNumber = Math.random();
+                    if(randomNumber<0.25){
+                        setLocation(x+backPushSpider, y+backPushSpider);
+                    } else if (randomNumber<0.5){
+                        setLocation(x+backPushSpider, y-backPushSpider);
+                    } else if (randomNumber<0.75){
+                        setLocation(x-backPushSpider, y+backPushSpider);
+                    } else {
+                        setLocation(x-backPushSpider, y-backPushSpider);
                     }
                 }
             }
