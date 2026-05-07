@@ -73,11 +73,11 @@ public class LightCyclesBase extends Actor {
         int dy = 0;
         switch (getRotation()) {
             case 90:
-                y = y + 15;
+                y += 15;
                 dy=1;
                 break;
             case 180:
-                x = x - 15;
+                x -= 15;
                 dx = -1;
                 break;
             case 270:
