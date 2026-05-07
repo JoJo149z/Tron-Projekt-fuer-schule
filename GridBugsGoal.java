@@ -14,8 +14,5 @@ public class GridBugsGoal extends Actor
      */
     public void act()
     {
-        if(isTouching(GridBugsPlayer.class) && getWorldOfType(GridBugs.class).time>=0){
-            getWorldOfType(GridBugs.class).levelFinished = true;
-        }
     }
 }

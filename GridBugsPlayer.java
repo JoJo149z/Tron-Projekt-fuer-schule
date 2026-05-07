@@ -26,6 +26,15 @@ public class GridBugsPlayer extends Actor
     
     public void act()
     {
+        if(getWorldOfType(GridBugs.class).levelFinished){
+            if(getY()>-30){
+                setLocation(163, getY()-1);
+                sleepFor(1);
+            } else {
+                Greenfoot.setWorld(new MenuWorld(getWorldOfType(WorldTemplate.class).getScore()));
+            }
+            return;
+        }
         getWorldOfType(GridBugs.class).playerX = getX();
         getWorldOfType(GridBugs.class).playerY = getY();
         getMovement();
@@ -54,7 +63,12 @@ public class GridBugsPlayer extends Actor
         }
         else if(timer==9){
             getWorld().removeObject(this);
-        }        
+            return;
+        }
+        
+        if(isTouching(GridBugsGoal.class) && getWorldOfType(GridBugs.class).time>=0){
+            getWorldOfType(GridBugs.class).levelFinished = true;
+        }
     }
     
     public void getMovement(){

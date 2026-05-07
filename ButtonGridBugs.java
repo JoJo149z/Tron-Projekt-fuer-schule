@@ -16,7 +16,8 @@ public class ButtonGridBugs extends Actor
     public void act()
     {
         if(Greenfoot.mouseClicked(this)){
-            Greenfoot.setWorld(new GridBugs(level));
+            Greenfoot.setWorld(new GridBugs(getWorldOfType(WorldTemplate.class).getScore(), level));
+            
         }
     }
 }

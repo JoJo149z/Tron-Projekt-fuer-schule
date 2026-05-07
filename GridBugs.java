@@ -6,7 +6,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class GridBugs extends World
+public class GridBugs extends WorldTemplate
 {
 
     /**
@@ -22,9 +22,9 @@ public class GridBugs extends World
     
     public boolean levelFinished;
     
-    public GridBugs(int level)
-    {    
-        super(326,349, 1);
+    public GridBugs(int score, int level)
+    {
+        super(score);       // überträgt den score
         
         levelFinished = false;
         
@@ -44,13 +44,16 @@ public class GridBugs extends World
     }
     
     public void act(){
-        showText(Integer.toString(time), 163, 172);
+        showScore(50, 50);
+        
+        showText(Integer.toString(time), 163, 172); // Zeigt den Timer an
         timeTimer--;
-        if(timeTimer%6 == 0){
+        if(timeTimer%6 == 0 & !levelFinished){
             time--;                                     // Timer des Spielers verändert sich
         }
         
         if(levelFinished){
+            setBackground("Grid Bugs Hintergrund end.png");
             showText("Du hast gewonnen", 163, 250);
         }
         if(time<0){

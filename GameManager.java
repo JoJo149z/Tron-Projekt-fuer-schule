@@ -19,10 +19,10 @@ public class GameManager extends Actor
         punkte = 0;
         switch(testGame){
             case 1:
-                Greenfoot.setWorld(new LightCycles(level));
+                Greenfoot.setWorld(new LightCycles(getWorldOfType(WorldTemplate.class).getScore(), level));
                break;
             case 2:
-                Greenfoot.setWorld(new GridBugs(level));
+                Greenfoot.setWorld(new GridBugs(getWorldOfType(WorldTemplate.class).getScore(), level));
                 break;
         }
     }

@@ -34,6 +34,7 @@ public class GridBugsSpinne extends Actor
         }
         
         if(timer == 6){
+            getWorldOfType(GridBugs.class).addToScore(10);
             getWorld().removeObject(this);
         }
     }

@@ -6,17 +6,20 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class MenuWorld extends World
+public class MenuWorld extends WorldTemplate
 {
 
     /**
      * Constructor for objects of class MyWorld.
      * 
      */
-    public MenuWorld()
+    public MenuWorld(int score)
     {    
-        super(326,349, 1); 
-
+        super(score);
         addObject(new ButtonGridBugs(), 150,150);
+    }
+    
+    public void act(){
+        showScore(50, 50);
     }
 }

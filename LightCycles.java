@@ -6,19 +6,23 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class LightCycles extends World
+public class LightCycles extends WorldTemplate
 {
     int difficulty;
     /**
      * Constructor for objects of class LightCycles.
      * 
      */
-    public LightCycles(int difficulty)
-    {    
-        super(326,349, 1);
+    public LightCycles(int score, int difficulty)
+    {
+        super(score);
         this.difficulty = difficulty;
         setPaintOrder(LightCyclesBase.class, ImageObject.class);
         prepare();
+    }
+    
+    public void act(){
+        showScore(50, 50);
     }
     
     /**
