@@ -73,23 +73,23 @@ public class LightCyclesBase extends Actor {
         int dy = 0;
         switch (getRotation()) {
             case 90:
-                y += 15;
+                y += 5;
                 dy=1;
                 break;
             case 180:
-                x -= 15;
+                x -= 5;
                 dx = -1;
                 break;
             case 270:
-                y = y - 15;
+                y = y - 5;
                 dy=-1;
                 break;
             case 0:
-                x = x + 15;
+                x = x + 5;
                 dx = 1;
                 break;
         }
-        for (int i = 0; i < 13; i++) {
+        for (int i = 0; i < 3; i++) {
             if (getOneObjectAtOffset(x+i*dx, y-i*dy, ImageObject.class) != null) {
                 return true;
             }
