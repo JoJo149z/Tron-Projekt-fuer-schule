@@ -10,15 +10,14 @@ public class LightCycles extends WorldTemplate
 {
     int difficulty;
     public LightCycles() {
-        this(1, 2);
+        this(2);
     }
     /**
      * Constructor for objects of class LightCycles.
      * 
      */
-    public LightCycles(int score, int difficulty)
+    public LightCycles(int difficulty)
     {
-        super(score);
         this.difficulty = difficulty;
         setPaintOrder(LightCyclesBase.class, ImageObject.class);
         prepare();

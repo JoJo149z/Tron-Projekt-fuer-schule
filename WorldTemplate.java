@@ -14,29 +14,14 @@ public class WorldTemplate extends World
      * 
      */
     
-    private int score;
     
-    public WorldTemplate(int score)
+    public WorldTemplate()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(326,349, 1, false);
-        
-        this.score = score;
     }
     
     public void showScore(int x, int y){
-        showText(Integer.toString(score), x, y);
-    }
-    
-    public int getScore(){
-        return score;
-    }
-    
-    public void setScore(int score){
-        this.score = score;
-    }
-    
-    public void addToScore(int x){
-        score += x;
+        showText(Integer.toString(GameManager.getPunkte()), x, y);
     }
 }

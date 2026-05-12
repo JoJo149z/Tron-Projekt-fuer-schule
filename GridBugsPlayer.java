@@ -31,7 +31,7 @@ public class GridBugsPlayer extends Actor
                 setLocation(163, getY()-1);
                 sleepFor(1);
             } else {
-                Greenfoot.setWorld(new MenuWorld(getWorldOfType(WorldTemplate.class).getScore()));
+                Greenfoot.setWorld(new MenuWorld());
             }
             return;
         }

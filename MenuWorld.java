@@ -13,9 +13,8 @@ public class MenuWorld extends WorldTemplate
      * Constructor for objects of class MyWorld.
      * 
      */
-    public MenuWorld(int score)
-    {    
-        super(score);
+    public MenuWorld()
+    { 
         addObject(new ButtonGridBugs(), 150,150);
     }
     

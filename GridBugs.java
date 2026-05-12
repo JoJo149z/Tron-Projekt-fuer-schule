@@ -22,10 +22,8 @@ public class GridBugs extends WorldTemplate
     
     public boolean levelFinished;
     
-    public GridBugs(int score, int level)
-    {
-        super(score);       // überträgt den score
-        
+    public GridBugs(int level)
+    {   
         levelFinished = false;
         
         addPlayer();
