@@ -89,10 +89,14 @@ public class LightCyclesBase extends Actor {
                 dx = 1;
                 break;
         }
+        //x=5,dx=1,y=0,dy=0
         for (int i = 0; i < 3; i++) {
-            if (getOneObjectAtOffset(x+i*dx, y-i*dy, ImageObject.class) != null) {
-                return true;
+            for (int j = -2; j < 2; j++) {
+                if (getOneObjectAtOffset(x+i*dx+j*Math.abs(dy), y-i*dy+j*Math.abs(dx), ImageObject.class) != null) {
+                    return true;
+                }
             }
+
         }
         return getX() + x <= 10 || getX() + x >= 316 || getY() + y <= 55 || getY() + y >= 340;
     }
