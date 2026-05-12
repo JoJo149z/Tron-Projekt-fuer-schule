@@ -22,8 +22,12 @@ public class GridBugs extends WorldTemplate
     
     public boolean levelFinished;
     
+    public int level;
+    
     public GridBugs(int level)
     {   
+        this.level = level;
+        
         levelFinished = false;
         
         addPlayer();
@@ -33,6 +37,9 @@ public class GridBugs extends WorldTemplate
         switch(level){
             case 1:
                 addSetupLevel1();
+                break;
+            case 2:
+                addSetupLevel2();
                 break;
             default:
                 level = 1;
@@ -53,6 +60,7 @@ public class GridBugs extends WorldTemplate
         if(levelFinished){
             setBackground("Grid Bugs Hintergrund end.png");
             showText("Du hast gewonnen", 163, 250);
+            GameManager.addLevelGridBugs(1);
         }
         if(time<0){
             showText("Du hast verloren", 163, 250);
@@ -80,5 +88,16 @@ public class GridBugs extends WorldTemplate
         addSpinne(296, 180);
         
         time = 100;
+    }
+    
+    public void addSetupLevel2() {
+        addSpinne(20, 140);
+        addSpinne(40, 180);
+        addSpinne(60, 150);
+        addSpinne(80, 190);
+        addSpinne(246, 190);
+        addSpinne(266, 150);
+        addSpinne(286, 180);
+        addSpinne(306, 140);
     }
 }

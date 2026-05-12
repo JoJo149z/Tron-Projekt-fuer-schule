@@ -8,15 +8,27 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class GameManager
 {
-    static int punkte;
-
+    private static int punkte;
+    
+    private static int levelGridBugs;
+    
     public static void addPunkte(int change){
         punkte += change;
     }
     public static void setPunkte(int value){
-        punkte=value;
+        punkte = value;
     }
     public static int getPunkte(){
         return punkte;
+    }
+    
+    public static void addLevelGridBugs(int change){
+        levelGridBugs += change;
+    }
+    public static void setLevelGridBugs(int level){
+        levelGridBugs = level;
+    }
+    public static int getLevelGridBugs(){
+        return levelGridBugs;
     }
 }
