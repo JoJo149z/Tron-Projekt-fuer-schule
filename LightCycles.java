@@ -9,6 +9,9 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class LightCycles extends WorldTemplate
 {
     int difficulty;
+    public LightCycles() {
+        this(1, 2);
+    }
     /**
      * Constructor for objects of class LightCycles.
      * 
@@ -31,14 +34,18 @@ public class LightCycles extends WorldTemplate
      */
     private void prepare()
     {
+        int enemySpeed = 1;
+        if (difficulty>2){
+            enemySpeed = difficulty-1;
+        }
         LightCyclesPlayer lightCyclesPlayer = new LightCyclesPlayer(1, false,"up");
         addObject(lightCyclesPlayer,154,273);
-        LightCyclesEnemy lightCyclesEnemy = new LightCyclesEnemy(1, true, "down");
+        LightCyclesEnemy lightCyclesEnemy = new LightCyclesEnemy(enemySpeed, true, "down");
         addObject(lightCyclesEnemy,154,100);
         if(difficulty > 1) {
-            LightCyclesEnemy lightCyclesEnemy2 = new LightCyclesEnemy(1, true, "down");
+            LightCyclesEnemy lightCyclesEnemy2 = new LightCyclesEnemy(enemySpeed, true, "down");
             addObject(lightCyclesEnemy2, 244, 100);
-            LightCyclesEnemy lightCyclesEnemy3 = new LightCyclesEnemy(1, true, "down");
+            LightCyclesEnemy lightCyclesEnemy3 = new LightCyclesEnemy(enemySpeed, true, "down");
             addObject(lightCyclesEnemy3, 82, 100);
         }
     }
