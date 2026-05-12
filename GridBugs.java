@@ -60,7 +60,6 @@ public class GridBugs extends WorldTemplate
         if(levelFinished){
             setBackground("Grid Bugs Hintergrund end.png");
             showText("Du hast gewonnen", 163, 250);
-            GameManager.addLevelGridBugs(1);
         }
         if(time<0){
             showText("Du hast verloren", 163, 250);
@@ -99,5 +98,7 @@ public class GridBugs extends WorldTemplate
         addSpinne(266, 150);
         addSpinne(286, 180);
         addSpinne(306, 140);
+        
+        time = 130;
     }
 }
