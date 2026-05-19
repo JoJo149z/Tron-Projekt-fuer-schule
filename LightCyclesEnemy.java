@@ -10,11 +10,10 @@ public class LightCyclesEnemy extends LightCyclesBase {
     /**
      *
      * @param speed             != 0
-     * @param isEnemy           true/false
      * @param setStartDirection left, up, down, right
      */
-    LightCyclesEnemy(int speed, Boolean isEnemy, String setStartDirection) {
-        super(speed, isEnemy, setStartDirection);
+    LightCyclesEnemy(int speed, String setStartDirection) {
+        super(speed, true, setStartDirection);
     }
 
     @Override

@@ -1,4 +1,7 @@
-import greenfoot.Actor;
+import greenfoot.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class LightCyclesBase extends Actor {
 
@@ -6,6 +9,7 @@ public class LightCyclesBase extends Actor {
     String farbe;
     boolean isDead;
     boolean isEnemy;
+    static int enemyAmount;
 
     /**
      *
@@ -23,9 +27,20 @@ public class LightCyclesBase extends Actor {
     }
 
     public void act() {
+        // enemyAmount konfigurieren
+        List<LightCyclesBase> enemysList = new ArrayList<>(getWorld().getObjects(LightCyclesEnemy.class));
+        enemyAmount = enemysList.size();
         handelMovement();
-        if (moveCollision() && speed>0){
+        if (enemyAmount == 0){
+            if (GameManager.getLevelLightCycles() <= 5){
+                GameManager.addLevelLightCycles(1);
+            }
+            Greenfoot.setWorld(new MenuWorld());
+        }
+        if (moveCollision() && !isDead){
             death();
+            getWorld().removeObject(this);
+            return;
         }
         move(speed);
         getWorld().addObject(new ImageObject("LightCyclesTrail"+farbe+".png"), getX(), getY());
@@ -58,13 +73,14 @@ public class LightCyclesBase extends Actor {
     public void death() {
             isDead = true;
             speed = 0;
+            setImage(("LightcyclesExplosion1.png"));
+            setImage(("LightcyclesExplosion2.png"));
             if (isEnemy) {
                 GameManager.addPunkte(1000);
             } else {
                 GameManager.setPunkte(0);
+                Greenfoot.setWorld(new MenuWorld());
             }
-            setImage(("LightcyclesExplosion1.png"));
-            setImage(("LightcyclesExplosion2.png"));
     }
     public Boolean moveCollision(){
         int x = 0;
@@ -89,7 +105,6 @@ public class LightCyclesBase extends Actor {
                 dx = 1;
                 break;
         }
-        //x=5,dx=1,y=0,dy=0
         for (int i = 0; i < 3; i++) {
             for (int j = -2; j < 2; j++) {
                 if (getOneObjectAtOffset(x+i*dx+j*Math.abs(dy), y-i*dy+j*Math.abs(dx), ImageObject.class) != null) {

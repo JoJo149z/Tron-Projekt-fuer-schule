@@ -11,12 +11,9 @@ public class LightCyclesPlayer extends LightCyclesBase
     /**
      *
      * @param speed             != 0
-     * @param isEnemy           true/false
      * @param setStartDirection left, up, down, right
      */
-    LightCyclesPlayer(int speed, boolean isEnemy, String setStartDirection) {
-        super(speed, isEnemy, setStartDirection);
-    }
+    LightCyclesPlayer(int speed, String setStartDirection) { super(speed, false, setStartDirection); }
 
 
     @Override

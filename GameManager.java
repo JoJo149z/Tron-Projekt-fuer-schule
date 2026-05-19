@@ -13,6 +13,16 @@ public class GameManager
     private static int levelGridBugs = 1;
     
     private static int levelLightCycles = 1;
+
+    public static void reset(){
+        punkte = 0;
+        levelGridBugs = 1;
+        levelLightCycles = 1;
+    }
+
+    public static void initialiseLightCycles(){
+        Greenfoot.setWorld(new LightCycles(levelLightCycles));
+    }
     
     public static void addPunkte(int change){
         punkte += change;

@@ -10,7 +10,7 @@ public class LightCycles extends WorldTemplate
 {
     int difficulty;
     public LightCycles() {
-        this(2);
+        this(1);
     }
     /**
      * Constructor for objects of class LightCycles.
@@ -37,14 +37,14 @@ public class LightCycles extends WorldTemplate
         if (difficulty>2){
             enemySpeed = difficulty-1;
         }
-        LightCyclesPlayer lightCyclesPlayer = new LightCyclesPlayer(1, false,"up");
+        LightCyclesPlayer lightCyclesPlayer = new LightCyclesPlayer(1,"up");
         addObject(lightCyclesPlayer,154,273);
-        LightCyclesEnemy lightCyclesEnemy = new LightCyclesEnemy(enemySpeed, true, "down");
+        LightCyclesEnemy lightCyclesEnemy = new LightCyclesEnemy(enemySpeed, "down");
         addObject(lightCyclesEnemy,154,100);
         if(difficulty > 1) {
-            LightCyclesEnemy lightCyclesEnemy2 = new LightCyclesEnemy(enemySpeed, true, "down");
+            LightCyclesEnemy lightCyclesEnemy2 = new LightCyclesEnemy(enemySpeed, "down");
             addObject(lightCyclesEnemy2, 244, 100);
-            LightCyclesEnemy lightCyclesEnemy3 = new LightCyclesEnemy(enemySpeed, true, "down");
+            LightCyclesEnemy lightCyclesEnemy3 = new LightCyclesEnemy(enemySpeed, "down");
             addObject(lightCyclesEnemy3, 82, 100);
         }
     }
