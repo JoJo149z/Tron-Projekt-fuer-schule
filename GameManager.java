@@ -1,56 +1,69 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import greenfoot.Greenfoot;
 
 /**
  * Write a description of class GameManager here.
- * 
- * @author (your name) 
+ *
+ * @author (your name)
  * @version (a version number or a date)
  */
-public class GameManager
-{
+public class GameManager {
     private static int punkte;
-    
+
     private static int levelGridBugs = 1;
-    
+
     private static int levelLightCycles = 1;
 
-    public static void reset(){
+    public static void reset() {
         punkte = 0;
         levelGridBugs = 1;
         levelLightCycles = 1;
     }
 
-    public static void initialiseLightCycles(){
+    public static void initialiseLevelSelect() {
+        Greenfoot.setWorld(new MenuWorld());
+    }
+
+    public static void initialiseLightCycles() {
         Greenfoot.setWorld(new LightCycles(levelLightCycles));
     }
-    
-    public static void addPunkte(int change){
+
+    public static void initialiseGridBugs() {
+        Greenfoot.setWorld(new GridBugs(levelGridBugs));
+    }
+
+    public static void addPunkte(int change) {
         punkte += change;
     }
-    public static void setPunkte(int value){
-        punkte = value;
-    }
-    public static int getPunkte(){
+
+    public static int getPunkte() {
         return punkte;
     }
-    
-    public static void addLevelGridBugs(int change){
+
+    public static void setPunkte(int value) {
+        punkte = value;
+    }
+
+    public static void addLevelGridBugs(int change) {
         levelGridBugs += change;
     }
-    public static void setLevelGridBugs(int level){
-        levelGridBugs = level;
-    }
-    public static int getLevelGridBugs(){
+
+    public static int getLevelGridBugs() {
         return levelGridBugs;
     }
-    
-    public static void addLevelLightCycles(int change){
+
+    public static void setLevelGridBugs(int level) {
+        levelGridBugs = level;
+    }
+
+    public static void addLevelLightCycles(int change) {
         levelLightCycles += change;
     }
-    public static void setLevelLightCycles(int level){
-        levelLightCycles = level;
-    }
-    public static int getLevelLightCycles(){
+
+    public static int getLevelLightCycles() {
         return levelLightCycles;
+    }
+
+    public static void setLevelLightCycles(int level) {
+        levelLightCycles = level;
     }
 }

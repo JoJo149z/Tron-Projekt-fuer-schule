@@ -1,15 +1,16 @@
-import greenfoot.*;
+import greenfoot.Actor;
+import greenfoot.Greenfoot;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class LightCyclesBase extends Actor {
 
+    static int enemyAmount;
     int speed;
     String farbe;
     boolean isDead;
     boolean isEnemy;
-    static int enemyAmount;
 
     /**
      *
@@ -19,8 +20,8 @@ public class LightCyclesBase extends Actor {
      */
     LightCyclesBase(int speed, boolean isEnemy, String setStartDirection) {
         setStartDirection(setStartDirection);
-        this.farbe = isEnemy? "Gelb":"Blau";
-        setImage("Lightcycles"+farbe+".png");
+        this.farbe = isEnemy ? "Gelb" : "Blau";
+        setImage("Lightcycles" + farbe + ".png");
         this.isEnemy = isEnemy;
         this.speed = speed;
         isDead = false;
@@ -31,25 +32,24 @@ public class LightCyclesBase extends Actor {
         List<LightCyclesBase> enemysList = new ArrayList<>(getWorld().getObjects(LightCyclesEnemy.class));
         enemyAmount = enemysList.size();
         handelMovement();
-        if (enemyAmount == 0){
-            if (GameManager.getLevelLightCycles() <= 5){
+        if (enemyAmount == 0) {
+            if (GameManager.getLevelLightCycles() <= 5) {
                 GameManager.addLevelLightCycles(1);
             }
             Greenfoot.setWorld(new MenuWorld());
         }
-        if (moveCollision() && !isDead){
+        if (moveCollision() && !isDead) {
             death();
             getWorld().removeObject(this);
             return;
         }
         move(speed);
-        getWorld().addObject(new ImageObject("LightCyclesTrail"+farbe+".png"), getX(), getY());
+        getWorld().addObject(new ImageObject("LightcyclesTrail" + farbe + ".png"), getX(), getY());
     }
 
     /**
      *
-     * @param direction
-     * as left, down, right, up
+     * @param direction as left, down, right, up
      */
     public void setStartDirection(String direction) {
         switch (direction) {
@@ -68,46 +68,48 @@ public class LightCyclesBase extends Actor {
         }
     }
 
-    public void handelMovement() {}
+    public void handelMovement() {
+    }
 
     public void death() {
-            isDead = true;
-            speed = 0;
-            setImage(("LightcyclesExplosion1.png"));
-            setImage(("LightcyclesExplosion2.png"));
-            if (isEnemy) {
-                GameManager.addPunkte(1000);
-            } else {
-                GameManager.setPunkte(0);
-                Greenfoot.setWorld(new MenuWorld());
-            }
+        isDead = true;
+        speed = 0;
+        setImage(("LightcyclesExplosion1.png"));
+        setImage(("LightcyclesExplosion2.png"));
+        if (isEnemy) {
+            GameManager.addPunkte(1000);
+        } else {
+            GameManager.setPunkte(0);
+            Greenfoot.setWorld(new MenuWorld());
+        }
     }
-    public Boolean moveCollision(){
+
+    public Boolean moveCollision() {
         int x = 0;
         int y = 0;
         int dx = 0;
         int dy = 0;
         switch (getRotation()) {
             case 90:
-                y += 5;
-                dy=1;
+                y = 5;
+                dy = 1;
                 break;
             case 180:
-                x -= 5;
+                x = -5;
                 dx = -1;
                 break;
             case 270:
-                y = y - 5;
-                dy=-1;
+                y = -5;
+                dy = -1;
                 break;
             case 0:
-                x = x + 5;
+                x = 5;
                 dx = 1;
                 break;
         }
         for (int i = 0; i < 3; i++) {
             for (int j = -2; j < 2; j++) {
-                if (getOneObjectAtOffset(x+i*dx+j*Math.abs(dy), y-i*dy+j*Math.abs(dx), ImageObject.class) != null) {
+                if (getOneObjectAtOffset(x + i * dx + j * Math.abs(dy), y - i * dy + j * Math.abs(dx), ImageObject.class) != null) {
                     return true;
                 }
             }
