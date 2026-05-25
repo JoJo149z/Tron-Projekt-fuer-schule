@@ -17,6 +17,7 @@ public class GameManager {
         punkte = 0;
         levelGridBugs = 1;
         levelLightCycles = 1;
+        Greenfoot.setWorld(new MenuWorld());
     }
 
     public static void initialiseLevelSelect() {

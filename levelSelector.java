@@ -10,10 +10,12 @@ import greenfoot.Greenfoot;
 public class levelSelector extends Actor {
 
     private boolean selectionStarted;
+    private int timer;
 
     levelSelector() {
         selectionStarted = false;
         setRotation(-90);
+        timer = 0;
     }
 
     /**
@@ -21,6 +23,14 @@ public class levelSelector extends Actor {
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public void act() {
+        if (timer < 10) {
+            timer += 1;
+            if (timer == 10) {
+                Greenfoot.getKey(); //clear key buffer
+            }
+            return;
+        }
+
         String key = Greenfoot.getKey();
         if (!selectionStarted) {
             if (key != null) {
@@ -32,6 +42,9 @@ public class levelSelector extends Actor {
                 }
                 if ("w".equals(key)) {
                     selectionStarted = true;
+                }
+                if ("r".equals(key)) {
+                    GameManager.reset();
                 }
             }
         } else {

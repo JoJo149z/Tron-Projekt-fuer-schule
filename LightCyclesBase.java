@@ -11,6 +11,7 @@ public class LightCyclesBase extends Actor {
     String farbe;
     boolean isDead;
     boolean isEnemy;
+    int timer;
 
     /**
      *
@@ -25,20 +26,31 @@ public class LightCyclesBase extends Actor {
         this.isEnemy = isEnemy;
         this.speed = speed;
         isDead = false;
+        timer = 0;
     }
 
     public void act() {
+        timer += 1;
+        if (timer < 10) {
+            return;
+        } else if (timer == 10) {
+            Greenfoot.getKey(); //clear key buffer
+        }
+
         // enemyAmount konfigurieren
         List<LightCyclesBase> enemysList = new ArrayList<>(getWorld().getObjects(LightCyclesEnemy.class));
         enemyAmount = enemysList.size();
-        handelMovement();
+
+        if (!isDead) {
+            handelMovement();
+        }
         if (enemyAmount == 0) {
             if (GameManager.getLevelLightCycles() <= 5) {
                 GameManager.addLevelLightCycles(1);
             }
             Greenfoot.setWorld(new MenuWorld());
         }
-        if (moveCollision() && !isDead) {
+        if (moveCollision()) {
             death();
             getWorld().removeObject(this);
             return;

@@ -2,8 +2,8 @@ import greenfoot.Greenfoot;
 
 /**
  * Write a description of class LightCyclesEnemy here.
- * 
- * @author (your name) 
+ *
+ * @author (your name)
  * @version (a version number or a date)
  */
 public class LightCyclesEnemy extends LightCyclesBase {
@@ -18,20 +18,18 @@ public class LightCyclesEnemy extends LightCyclesBase {
 
     @Override
     public void handelMovement() {
-        if (!isDead) {
+        if (moveCollision()) {
+            int i = Greenfoot.getRandomNumber(2);
+            if (i == 0) {
+                turn(90);
+            } else if (i == 1) {
+                turn(-90);
+            }
             if (moveCollision()) {
-                int i = Greenfoot.getRandomNumber(2);
-                if (i == 0){
-                    turn(90);
-                }else if (i == 1){
-                    turn(-90);
-                }
-                if (moveCollision()) {
-                    if (i == 0) {
-                        turn(-180);
-                    } else if (i == 1) {
-                        turn(180);
-                    }
+                if (i == 0) {
+                    turn(-180);
+                } else if (i == 1) {
+                    turn(180);
                 }
             }
         }
