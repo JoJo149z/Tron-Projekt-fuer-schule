@@ -7,12 +7,12 @@ import greenfoot.Greenfoot;
  * @author (your name)
  * @version (a version number or a date)
  */
-public class levelSelector extends Actor {
+public class LevelSelector extends Actor {
 
     private boolean selectionStarted;
     private int timer;
 
-    levelSelector() {
+    LevelSelector() {
         selectionStarted = false;
         setRotation(-90);
         timer = 0;
@@ -23,6 +23,9 @@ public class levelSelector extends Actor {
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public void act() {
+        if (getObjectsInRange(100, ImageObject.class).isEmpty()) {
+            GameManager.softReset();
+        }
         if (timer < 10) {
             timer += 1;
             if (timer == 10) {
@@ -41,10 +44,17 @@ public class levelSelector extends Actor {
                     turn(90);
                 }
                 if ("w".equals(key)) {
-                    selectionStarted = true;
+                    move(100);
+                    if (getIntersectingObjects(ImageObject.class).isEmpty()) {
+                        move(-100);
+                        return;
+                    } else {
+                        move(-100);
+                        selectionStarted = true;
+                    }
                 }
                 if ("r".equals(key)) {
-                    GameManager.reset();
+                    GameManager.fullReset();
                 }
             }
         } else {
@@ -54,9 +64,7 @@ public class levelSelector extends Actor {
 
     //wenn 50 pixel bewegt dann ImageObject entfernen
     public void select() {
-        if (!(getX() <= 60 || (getX() >= 270) || getY() <= 100 || getY() >= 280)) {
-            move(2);
-        } else {
+        if ((getX() <= 60 || (getX() >= 270) || getY() <= 100 || getY() >= 280)) {
             getIntersectingObjects(ImageObject.class).forEach(imageObject -> {
                 switch (imageObject.getImageName()) {
                     case "MenuWorldBluePart.png" -> GameManager.initialiseLightCycles();
@@ -66,6 +74,8 @@ public class levelSelector extends Actor {
                 }
             });
             removeTouching(ImageObject.class);
+        } else {
+            move(2);
         }
 
     }

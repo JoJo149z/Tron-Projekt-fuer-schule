@@ -48,11 +48,11 @@ public class LightCyclesBase extends Actor {
             if (GameManager.getLevelLightCycles() <= 5) {
                 GameManager.addLevelLightCycles(1);
             }
-            Greenfoot.setWorld(new MenuWorld());
+            GameManager.setIsLightCyclesCompleted(true);
+            GameManager.initialiseLevelSelect();
         }
         if (moveCollision()) {
             death();
-            getWorld().removeObject(this);
             return;
         }
         move(speed);
@@ -91,9 +91,10 @@ public class LightCyclesBase extends Actor {
         if (isEnemy) {
             GameManager.addPunkte(1000);
         } else {
-            GameManager.setPunkte(0);
-            Greenfoot.setWorld(new MenuWorld());
+            Greenfoot.delay(10);
+            GameManager.fullReset();
         }
+        getWorld().removeObject(this);
     }
 
     public Boolean moveCollision() {

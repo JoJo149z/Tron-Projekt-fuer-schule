@@ -12,12 +12,20 @@ public class GameManager {
     private static int levelGridBugs = 1;
 
     private static int levelLightCycles = 1;
+    private static boolean isLightCyclesCompleted = false;
+    private static boolean isGridBugsCompleted = false;
 
-    public static void reset() {
+    public static void fullReset() {
         punkte = 0;
         levelGridBugs = 1;
         levelLightCycles = 1;
-        Greenfoot.setWorld(new MenuWorld());
+        GameManager.initialiseLevelSelect();
+    }
+
+    public static void softReset() {
+        isLightCyclesCompleted = false;
+        isGridBugsCompleted = false;
+        GameManager.initialiseLevelSelect();
     }
 
     public static void initialiseLevelSelect() {
@@ -66,5 +74,21 @@ public class GameManager {
 
     public static void setLevelLightCycles(int level) {
         levelLightCycles = level;
+    }
+
+    public static boolean getIsLightCyclesCompleted() {
+        return isLightCyclesCompleted;
+    }
+
+    public static void setIsLightCyclesCompleted(boolean isLightCyclesCompleted) {
+        GameManager.isLightCyclesCompleted = isLightCyclesCompleted;
+    }
+
+    public static boolean getIsGridBugsCompleted() {
+        return isGridBugsCompleted;
+    }
+
+    public static void setIsGridBugsCompleted(boolean isGridBugsCompleted) {
+        GameManager.isGridBugsCompleted = isGridBugsCompleted;
     }
 }
