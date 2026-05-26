@@ -87,6 +87,7 @@ public class LightCyclesBase extends Actor {
         isDead = true;
         speed = 0;
         setImage(("LightcyclesExplosion1.png"));
+        Greenfoot.delay(5);
         setImage(("LightcyclesExplosion2.png"));
         if (isEnemy) {
             GameManager.addPunkte(1000);
