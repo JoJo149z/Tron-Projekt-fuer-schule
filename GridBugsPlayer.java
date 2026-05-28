@@ -30,6 +30,7 @@ public class GridBugsPlayer extends Actor {
                 setLocation(163, getY() - 1);
                 sleepFor(1);
             } else {
+                Greenfoot.delay(10);
                 GameManager.addLevelGridBugs(1);
                 GameManager.setIsGridBugsCompleted(true);
                 GameManager.initialiseLevelSelect();

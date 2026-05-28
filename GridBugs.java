@@ -63,6 +63,8 @@ public class GridBugs extends WorldTemplate
         }
         if(time<0){
             showText("Du hast verloren", 163, 250);
+            Greenfoot.delay(10);
+            GameManager.fullReset();
         }
     }
     
