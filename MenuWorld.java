@@ -11,7 +11,6 @@ public class MenuWorld extends WorldTemplate {
      *
      */
     public MenuWorld() {
-        //addObject(new ButtonGridBugs(), 150, 150);
         addObject(new LevelSelector(), 165, 190);
         if (!GameManager.getIsLightCyclesCompleted()) {
             addObject(new ImageObject("MenuWorldBluePart.png"), 60, 190);
@@ -34,5 +33,6 @@ public class MenuWorld extends WorldTemplate {
      * That is: create the initial objects and add them to the world.
      */
     private void prepare() {
+        setPaintOrder(LevelSelector.class, ImageObject.class);
     }
 }

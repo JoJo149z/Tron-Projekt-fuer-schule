@@ -19,7 +19,7 @@ public class GameManager {
         punkte = 0;
         levelGridBugs = 1;
         levelLightCycles = 1;
-        GameManager.initialiseLevelSelect();
+        softReset();
     }
 
     public static void softReset() {
