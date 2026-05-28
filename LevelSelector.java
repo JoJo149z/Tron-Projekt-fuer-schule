@@ -23,7 +23,7 @@ public class LevelSelector extends Actor {
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public void act() {
-        if (getObjectsInRange(100, ImageObject.class).isEmpty()) {
+        if (getObjectsInRange(100, ImageObject.class).isEmpty()) { //wenn alle mini games fertig sind einen softReset machen
             GameManager.softReset();
         }
         if (timer < 10) {
@@ -69,8 +69,8 @@ public class LevelSelector extends Actor {
                 switch (imageObject.getImageName()) {
                     case "MenuWorldBluePart.png" -> GameManager.initialiseLightCycles();
                     case "MenuWorldGreenPart.png" -> GameManager.initialiseGridBugs();
-                    case "MenuWorldOrangePart.png" -> Greenfoot.setWorld(new MenuWorld());
-                    case "MenuWorldRedPart.png" -> Greenfoot.setWorld(new MenuWorld());
+                    /*case "MenuWorldOrangePart.png" -> Greenfoot.setWorld(new MenuWorld());
+                    case "MenuWorldRedPart.png" -> Greenfoot.setWorld(new MenuWorld());*/
                 }
             });
             removeTouching(ImageObject.class);
