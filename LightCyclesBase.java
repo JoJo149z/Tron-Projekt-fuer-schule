@@ -34,7 +34,7 @@ public class LightCyclesBase extends Actor {
         if (timer < 10) {
             return;
         } else if (timer == 10) {
-            Greenfoot.getKey(); //clear key buffer
+            Greenfoot.getKey(); //clear key buffer aber nur nach dem kurzen delay
         }
 
         // enemyAmount konfigurieren

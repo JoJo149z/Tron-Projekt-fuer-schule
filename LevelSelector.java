@@ -63,6 +63,7 @@ public class LevelSelector extends Actor {
     //wenn 50 pixel bewegt dann ImageObject entfernen
     public void select() {
         if ((getX() <= 60 || (getX() >= 270) || getY() <= 100 || getY() >= 280)) {
+                Greenfoot.delay(15);
             getIntersectingObjects(ImageObject.class).forEach(imageObject -> {
                 switch (imageObject.getImageName()) {
                     case "MenuWorldBluePart.png" -> GameManager.initialiseLightCycles();
@@ -71,7 +72,6 @@ public class LevelSelector extends Actor {
                     case "MenuWorldRedPart.png" -> Greenfoot.setWorld(new MenuWorld());*/
                 }
             });
-            removeTouching(ImageObject.class);
         } else {
             move(2);
         }
