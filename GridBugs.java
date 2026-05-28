@@ -21,6 +21,7 @@ public class GridBugs extends WorldTemplate
     public int timeTimer = 0;
     
     public boolean levelFinished;
+    public boolean playerIsDead;
     
     public int level;
     
@@ -49,7 +50,7 @@ public class GridBugs extends WorldTemplate
     }
     
     public void act(){
-        showScore(50, 50);
+        showScore(50, 50); // Zeigt die aktuellen Punkte des Spielers an
         
         showText(Integer.toString(time), 163, 172); // Zeigt den Timer an
         timeTimer--;
@@ -58,12 +59,12 @@ public class GridBugs extends WorldTemplate
         }
         
         if(levelFinished){
-            setBackground("Grid Bugs Hintergrund end.png");
+            setBackground("Grid Bugs Hintergrund end.png"); // Verändert den Hintergrund zum Hintergrund am Ende
             showText("Du hast gewonnen", 163, 250);
         }
-        if(time<0 && !levelFinished){
+        if(time<0 && !levelFinished || playerIsDead){
             showText("Du hast verloren", 163, 250);
-            Greenfoot.delay(10);
+            Greenfoot.delay(200);
             GameManager.fullReset();
         }
     }
@@ -82,13 +83,17 @@ public class GridBugs extends WorldTemplate
         addObject(new GridBugsSpinne(), x, y);
     }
     
+    public void setPlayerIsDead(){
+        playerIsDead = true;
+    }
+    
     public void addSetupLevel1(){
         addSpinne(30, 180);
         addSpinne(80, 190);
         addSpinne(246, 190);
         addSpinne(296, 180);
         
-        time = 100;
+        time = 150;
     }
     
     public void addSetupLevel2() {

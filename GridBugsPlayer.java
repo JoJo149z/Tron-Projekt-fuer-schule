@@ -9,26 +9,27 @@ import greenfoot.Greenfoot;
  */
 public class GridBugsPlayer extends Actor {
     /**
-     * Act - do whatever the GridBugsPlayer wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
+     * Klasse des Spielers
+     * Steuert den Spieler und seine Schüsse, 
+    */
 
-    boolean stillRight = false;
-    boolean stillDown = false;
-    boolean stillUp = false;
-    boolean stillLeft = false;
+    boolean stillRight = false; // Prüft, ob die rechte Pfeiltaste nach Schuss des Spielers noch immer gedrückt ist
+    boolean stillDown = false; // Prüft, ob die untere Pfeiltaste nach Schuss des Spielers noch immer gedrückt ist
+    boolean stillUp = false; // Prüft, ob die obere Pfeiltaste nach Schuss des Spielers noch immer gedrückt ist
+    boolean stillLeft = false; // Prüft, ob die linke Pfeiltaste nach Schuss des Spielers noch immer gedrückt ist
 
-    int speed = 1;
+    int speed = 1; // Geschwindigkeit des Spielers
 
-    int leben = 200;
+    int leben = 200; // Leben des Spielers
 
     int timer = 0;
 
     public void act() {
-        if (getWorldOfType(GridBugs.class).levelFinished) {
+        if (getWorldOfType(GridBugs.class).levelFinished) {  // Prüft, ob das spiel erfolgreich beendet wurde
             if (getY() > -30) {
+                // Ermöglicht, dass der Spieler nach erfolgreichem Ende des Levels nach oben steigt
                 setLocation(163, getY() - 1);
-                sleepFor(1);
+                sleepFor(1); 
             } else {
                 GameManager.addLevelGridBugs(1);
                 GameManager.setIsGridBugsCompleted(true);
@@ -58,7 +59,7 @@ public class GridBugsPlayer extends Actor {
             setImage("Explosion Status 3.png");
             timer++;
         } else if (timer == 9) {
-            GameManager.fullReset();
+            getWorldOfType(GridBugs.class).setPlayerIsDead();
         }
 
         if (isTouching(GridBugsGoal.class) && getWorldOfType(GridBugs.class).time >= 0) {
@@ -67,30 +68,34 @@ public class GridBugsPlayer extends Actor {
     }
 
     public void getMovement() {
-        // Steuerung zur Bewegung
+        // Steuert die Bewegung des Spielers
         int x = getX();
         int y = getY();
+        int moveUp = 0;
+        int moveDown = 0;
+        int moveLeft = 0;
+        int moveRight = 0;
         if (Greenfoot.isKeyDown("w")) {
-            if (!(((y - speed < 230 && y - speed > 147) || (y - speed > 70 && y - speed < 113)) && x > 97 && x < 229)) {  // damit nicht im mittleren Kasten
-                setLocation(x, y - 1);
+            if (!(((y - speed < 230 && y - speed > 147) || (y - speed > 70 && y - speed < 113)) && x > 97 && x < 229)) { // damit der Spieler nicht durch die Wände des zentralen Vierecks laufen kann
+                moveUp = 1; // Bewegung nach oben
             }
         }
-        if (Greenfoot.isKeyDown("y")) {
-            if (!(((y + speed < 230 && y + speed > 147) || (y + speed > 70 && y + speed < 113)) && x > 97 && x < 229)) {  // damit nicht im mittleren Kasten
-                setLocation(x, y + 1);
+        if (Greenfoot.isKeyDown("y") || Greenfoot.isKeyDown("s")) {
+            if (!(((y + speed < 230 && y + speed > 147) || (y + speed > 70 && y + speed < 113)) && x > 97 && x < 229)) {  // damit der Spieler nicht durch die Wände des zentralen Vierecks laufen kann
+                moveDown = 1; // Bewegung nach unten
             }
         }
         if (Greenfoot.isKeyDown("a")) {
-            if (!(((y < 230 && y > 147) || (y > 70 && y < 113)) && x - speed > 97 && x - speed < 229)) {
-                setLocation(x - speed, y);
+            if (!(((y < 230 && y > 147) || (y > 70 && y < 113)) && x - speed > 97 && x - speed < 229)) { // damit der Spieler nicht durch die Wände des zentralen Vierecks laufen kann
+                moveLeft = 1; // Bewegung nach links
             }
         }
         if (Greenfoot.isKeyDown("d")) {
-            if (!(((y < 230 && y > 147) || (y > 70 && y < 113)) && x + speed > 97 && x + speed < 229)) {
-                setLocation(x + speed, y);
+            if (!(((y < 230 && y > 147) || (y > 70 && y < 113)) && x + speed > 97 && x + speed < 229)) { // damit der Spieler nicht durch die Wände des zentralen Vierecks laufen kann
+                moveRight = 1; // Bewegung nach rechts
             }
         }
-
+        setLocation(x+moveRight-moveLeft, y+moveDown-moveUp);
     }
 
     public void getShooting() {
