@@ -11,7 +11,7 @@ public class GridBugs extends WorldTemplate
 
     /**
      * Constructor for objects of class GridBugs.
-     * 
+     *
      */
     
     public int playerX;
@@ -61,7 +61,7 @@ public class GridBugs extends WorldTemplate
             setBackground("Grid Bugs Hintergrund end.png");
             showText("Du hast gewonnen", 163, 250);
         }
-        if(time<0){
+        if(time<0 && !levelFinished){
             showText("Du hast verloren", 163, 250);
             Greenfoot.delay(10);
             GameManager.fullReset();
