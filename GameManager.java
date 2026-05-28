@@ -29,6 +29,9 @@ public class GameManager {
     }
 
     public static void initialiseLevelSelect() {
+        if (isLightCyclesCompleted && isGridBugsCompleted) {
+            softReset();
+        }
         Greenfoot.setWorld(new MenuWorld());
     }
 

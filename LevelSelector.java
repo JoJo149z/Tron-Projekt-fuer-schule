@@ -16,6 +16,7 @@ public class LevelSelector extends Actor {
         selectionStarted = false;
         setRotation(-90);
         timer = 0;
+
     }
 
     /**
@@ -23,9 +24,6 @@ public class LevelSelector extends Actor {
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public void act() {
-        if (getObjectsInRange(100, ImageObject.class).isEmpty()) { //wenn alle mini games fertig sind einen softReset machen
-            GameManager.softReset();
-        }
         if (timer < 10) {
             timer += 1;
             if (timer == 10) {

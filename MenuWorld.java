@@ -11,13 +11,13 @@ public class MenuWorld extends WorldTemplate {
      *
      */
     public MenuWorld() {
-        addObject(new LevelSelector(), 165, 190);
         if (!GameManager.getIsLightCyclesCompleted()) {
             addObject(new ImageObject("MenuWorldBluePart.png"), 60, 190);
         }
         if (!GameManager.getIsGridBugsCompleted()) {
             addObject(new ImageObject("MenuWorldGreenPart.png"), 165, 100);
         }
+        addObject(new LevelSelector(), 165, 190);
 
         //addObject(new ImageObject("MenuWorldOrangePart.png"), 270, 190);
         //ddObject(new ImageObject("MenuWorldRedPart.png"), 165, 280);
