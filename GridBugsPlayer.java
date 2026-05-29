@@ -4,14 +4,14 @@ import greenfoot.Greenfoot;
 /**
  * Write a description of class GridBugsPlayer here.
  *
- * @author (your name)
+ * @author (your name)s
  * @version (a version number or a date)
  */
 public class GridBugsPlayer extends Actor {
     /**
      * Klasse des Spielers
-     * Steuert den Spieler und seine Schüsse, 
-    */
+     * Steuert den Spieler und seine Schüsse,
+     */
 
     boolean stillRight = false; // Prüft, ob die rechte Pfeiltaste nach Schuss des Spielers noch immer gedrückt ist
     boolean stillDown = false; // Prüft, ob die untere Pfeiltaste nach Schuss des Spielers noch immer gedrückt ist
@@ -28,8 +28,8 @@ public class GridBugsPlayer extends Actor {
         if (getWorldOfType(GridBugs.class).levelFinished) {  // Prüft, ob das spiel erfolgreich beendet wurde
             if (getY() > -30) {
                 // Ermöglicht, dass der Spieler nach erfolgreichem Ende des Levels nach oben steigt
-                setLocation(163, getY() - 1);
-                sleepFor(1); 
+                setLocation(163, getY() - 2);
+                sleepFor(1);
             } else {
                 GameManager.addLevelGridBugs(1);
                 GameManager.setIsGridBugsCompleted(true);
@@ -95,7 +95,7 @@ public class GridBugsPlayer extends Actor {
                 moveRight = 1; // Bewegung nach rechts
             }
         }
-        setLocation(x+moveRight-moveLeft, y+moveDown-moveUp);
+        setLocation(x + moveRight - moveLeft, y + moveDown - moveUp);
     }
 
     public void getShooting() {
