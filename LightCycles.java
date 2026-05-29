@@ -22,7 +22,7 @@ public class LightCycles extends WorldTemplate {
     }
 
     public void act() {
-        showScore(50, 50);
+        showGameInfo();
     }
 
     /**

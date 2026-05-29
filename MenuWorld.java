@@ -6,26 +6,35 @@
  */
 public class MenuWorld extends WorldTemplate {
 
+
+    public MenuWorld() {
+        GameManager.fullReset();
+    }
+
     /**
      * Constructor for objects of class MyWorld.
      *
      */
-    public MenuWorld() {
-        if (!GameManager.getIsLightCyclesCompleted()) {
+    public MenuWorld(boolean LightCycles, boolean GridBugs) {
+        if (LightCycles) {
             addObject(new ImageObject("MenuWorldBluePart.png"), 60, 190);
         }
-        if (!GameManager.getIsGridBugsCompleted()) {
+        if (GridBugs) {
             addObject(new ImageObject("MenuWorldGreenPart.png"), 165, 100);
         }
-        addObject(new LevelSelector(), 165, 190);
-
+        if (LightCycles || GridBugs) {
+            addObject(new LevelSelector(), 165, 190);
+        }
         //addObject(new ImageObject("MenuWorldOrangePart.png"), 270, 190);
         //ddObject(new ImageObject("MenuWorldRedPart.png"), 165, 280);
         prepare();
     }
 
     public void act() {
-        showScore(50, 50);
+        if (GameManager.getLeben() > 1) {
+            showGameInfo();
+        }
+
     }
 
     /**

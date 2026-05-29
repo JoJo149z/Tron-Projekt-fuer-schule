@@ -93,7 +93,7 @@ public class LightCyclesBase extends Actor {
             GameManager.addPunkte(1000);
         } else {
             Greenfoot.delay(10);
-            GameManager.fullReset();
+            GameManager.resetLevel(1);
         }
         getWorld().removeObject(this);
     }

@@ -1,5 +1,9 @@
 import greenfoot.Greenfoot;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+
 /**
  * Write a description of class GameManager here.
  *
@@ -8,18 +12,69 @@ import greenfoot.Greenfoot;
  */
 public class GameManager {
     private static int punkte;
-
+    private static int leben;
     private static int levelGridBugs = 1;
-
     private static int levelLightCycles = 1;
     private static boolean isLightCyclesCompleted = false;
     private static boolean isGridBugsCompleted = false;
 
+
     public static void fullReset() {
         punkte = 0;
         levelGridBugs = 1;
+        leben = 3;
         levelLightCycles = 1;
         softReset();
+    }
+
+    /**
+     * Resets the current level based on the game type.
+     *
+     * @param game The type of game to reset.
+     *             1-LightCycles
+     *             2-GridBugs
+     */
+    public static void resetLevel(int game) {
+        if (leben > 1) {
+            leben--;
+            switch (game) {
+                case 1 -> initialiseLightCycles();
+                case 2 -> initialiseGridBugs();
+            }
+        } else {
+            highscoreScreen(punkte);
+        }
+
+    }
+
+    public static void highscoreScreen(int punkte) {
+        writeHighscore();
+
+        MenuWorld menu = new MenuWorld(false, false);
+        Greenfoot.setWorld(menu);
+        menu.showText("Game Over! ", 163, 155);
+        menu.showText("Your score: " + punkte, 163, 175);
+        menu.showText("Highscore: " + readHighscore(), 163, 195);
+        Greenfoot.delay(200);
+        fullReset();
+    }
+
+    public static Integer readHighscore() {
+        try {
+            return Integer.parseInt(Files.readString(Path.of("highscore")));
+        } catch (IOException e) {
+            return 0;
+        }
+    }
+
+    public static void writeHighscore() {
+        if (punkte <= readHighscore()) return;
+
+        try {
+            Files.writeString(Path.of("highscore"), Integer.toString(punkte));
+        } catch (IOException e) {
+            System.out.println("Failed to write highscore: " + e);
+        }
     }
 
     public static void softReset() {
@@ -32,7 +87,7 @@ public class GameManager {
         if (isLightCyclesCompleted && isGridBugsCompleted) {
             softReset();
         }
-        Greenfoot.setWorld(new MenuWorld());
+        Greenfoot.setWorld(new MenuWorld(!isLightCyclesCompleted, !isGridBugsCompleted));
     }
 
     public static void initialiseLightCycles() {
@@ -93,5 +148,13 @@ public class GameManager {
 
     public static void setIsGridBugsCompleted(boolean isGridBugsCompleted) {
         GameManager.isGridBugsCompleted = isGridBugsCompleted;
+    }
+
+    public static int getLeben() {
+        return leben;
+    }
+
+    public static void setLeben(int leben) {
+        GameManager.leben = leben;
     }
 }

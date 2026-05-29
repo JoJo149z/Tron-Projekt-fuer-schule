@@ -10,3 +10,4 @@ bluej.pkg
 # OS files
 .DS_Store
 Thumbs.db
+/highscore
