@@ -31,10 +31,17 @@ public class LightCyclesBase extends Actor {
 
     public void act() {
         timer += 1;
-        if (timer < 10) {
+        if (timer < 40) {
+            switch (timer / 10) {
+                case 3 -> getWorld().showText("GO!", 163, 175);
+                case 2 -> getWorld().showText("3", 163, 175);
+                case 1 -> getWorld().showText("2", 163, 175);
+                default -> getWorld().showText("1", 163, 175);
+            }
             return;
-        } else if (timer == 10) {
+        } else if (timer == 40) {
             Greenfoot.getKey(); //clear key buffer aber nur nach dem kurzen delay
+            getWorld().showText(null,163, 175);
         }
 
         // enemyAmount konfigurieren
