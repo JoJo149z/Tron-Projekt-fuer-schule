@@ -9,14 +9,13 @@ import greenfoot.Greenfoot;
 public class GridBugs extends WorldTemplate {
 
     /**
-     * Constructor for objects of class GridBugs.
-     *
+     * Welt für das Spiel GridBugs
      */
 
-    public int playerX;
-    public int playerY;
+    public int playerX; // X-Position des Spielers
+    public int playerY; // Y-Position des Spielers
 
-    public int time;
+    public int time; // Zeit, die dem Spieler noch bleibt um das Ziel zu erreichen
     public int timeTimer = 0;
 
     public boolean levelFinished;
@@ -25,6 +24,7 @@ public class GridBugs extends WorldTemplate {
     public int level;
 
     public GridBugs(int level) {
+        // Initialisiert die Welt für das jeweilige Level
         this.level = level;
 
         levelFinished = false;
@@ -33,13 +33,19 @@ public class GridBugs extends WorldTemplate {
 
         addGoal();
 
-        switch (level) {
+        switch (level) {  // erstellt das Setup für das jeweilige Level
             case 1:
                 addSetupLevel1();
                 break;
             case 2:
                 addSetupLevel2();
                 break;
+            case 3:
+                addSetupLevel3();
+                break;
+            case 4: 
+                level = 3; // stellt das Level auf 3 zurück, da es nur 3 Level gibt
+                addSetupLevel3();
             default:
                 level = 1;
                 addSetupLevel1();
@@ -52,8 +58,8 @@ public class GridBugs extends WorldTemplate {
 
         showText(Integer.toString(time), 163, 172); // Zeigt den Timer an
         timeTimer--;
-        if (timeTimer % 6 == 0 & !levelFinished) {
-            time--;                                     // Timer des Spielers verändert sich
+        if (timeTimer % 6 == 0 & !levelFinished) {  // ermöglicht einen langsameren Timer
+            time--;                   // Timer des Spielers verändert sich
         }
 
         if (levelFinished) {
@@ -63,7 +69,7 @@ public class GridBugs extends WorldTemplate {
         if (time < 0 && !levelFinished || playerIsDead) {
             showText("Du hast verloren", 163, 250);
             Greenfoot.delay(100);
-            GameManager.resetLevel(2);
+            GameManager.resetLevel(2);  
         }
     }
 
@@ -77,8 +83,8 @@ public class GridBugs extends WorldTemplate {
         addObject(new GridBugsGoal(), 163, 145);
     }
 
-    public void addSpinne(int x, int y) {
-        addObject(new GridBugsSpinne(), x, y);
+    public void addSpinne(int x, int y, int speed) {
+        addObject(new GridBugsSpinne(speed), x, y);
     }
 
     public void setPlayerIsDead() {
@@ -86,23 +92,42 @@ public class GridBugs extends WorldTemplate {
     }
 
     public void addSetupLevel1() {
-        addSpinne(30, 180);
-        addSpinne(80, 190);
-        addSpinne(246, 190);
-        addSpinne(296, 180);
+        int spiderSpeed = 1;
+        addSpinne(30, 180, spiderSpeed);
+        addSpinne(80, 190, spiderSpeed);
+        addSpinne(246, 19, spiderSpeed);
+        addSpinne(296, 180, spiderSpeed);
+        
 
         time = 150;
     }
 
     public void addSetupLevel2() {
-        addSpinne(20, 140);
-        addSpinne(40, 180);
-        addSpinne(60, 150);
-        addSpinne(80, 190);
-        addSpinne(246, 190);
-        addSpinne(266, 150);
-        addSpinne(286, 180);
-        addSpinne(306, 140);
+        int spiderSpeed = 1;
+        
+        addSpinne(20, 140, spiderSpeed);
+        addSpinne(40, 180, spiderSpeed);
+        addSpinne(60, 150, spiderSpeed);
+        addSpinne(80, 190, spiderSpeed);
+        addSpinne(246, 190, spiderSpeed);
+        addSpinne(266, 150, spiderSpeed);
+        addSpinne(286, 180, spiderSpeed);
+        addSpinne(306, 140, spiderSpeed);
+
+        time = 130;
+    }
+    
+    public void addSetupLevel3()  {
+        int spiderSpeed = 2;
+        
+        addSpinne(20, 140, spiderSpeed);
+        addSpinne(40, 180, spiderSpeed);
+        addSpinne(60, 150, spiderSpeed);
+        addSpinne(80, 190, spiderSpeed);
+        addSpinne(246, 190, spiderSpeed);
+        addSpinne(266, 150, spiderSpeed);
+        addSpinne(286, 180, spiderSpeed);
+        addSpinne(306, 140, spiderSpeed);
 
         time = 130;
     }

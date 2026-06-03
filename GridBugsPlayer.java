@@ -32,6 +32,7 @@ public class GridBugsPlayer extends Actor {
                 sleepFor(1);
             } else {
                 GameManager.addLevelGridBugs(1);
+                GameManager.addPunkte(getWorldOfType(GridBugs.class).time*10+leben);
                 GameManager.setIsGridBugsCompleted(true);
                 GameManager.initialiseLevelSelect();
             }

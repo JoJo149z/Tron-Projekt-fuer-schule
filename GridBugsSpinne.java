@@ -18,6 +18,10 @@ public class GridBugsSpinne extends Actor
     int backPushPlayer = 7; // wie stark eine Spinne von dem Player verschoben werden kann
     int backPushSpider = 1; // wie stark eine Spinne von einer Spinne verschoben werden kann
     
+    public GridBugsSpinne(int speed){
+        this.speed = speed;
+    }
+    
     public void act()
     {
         movingTimer++;
