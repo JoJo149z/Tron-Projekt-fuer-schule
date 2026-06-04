@@ -20,7 +20,7 @@ public class GridBugsPlayer extends Actor {
 
     int speed = 1; // Geschwindigkeit des Spielers
 
-    int leben = 200; // Leben des Spielers
+    int leben = 100; // Leben des Spielers
 
     int timer = 0;
 
@@ -72,31 +72,33 @@ public class GridBugsPlayer extends Actor {
         // Steuert die Bewegung des Spielers
         int x = getX();
         int y = getY();
+        
+        // halten Fest, welche Bewegungen ausgeführt werden müssen
         int moveUp = 0;
         int moveDown = 0;
         int moveLeft = 0;
         int moveRight = 0;
         if (Greenfoot.isKeyDown("w")) {
-            if (!(((y - speed < 230 && y - speed > 147) || (y - speed > 70 && y - speed < 113)) && x > 97 && x < 229)) { // damit der Spieler nicht durch die Wände des zentralen Vierecks laufen kann
+            if (!(((y - speed < 230 && y - speed > 147) || (y - speed > 70 && y - speed < 113)) && x > 97 && x < 229) && y>20) { // damit der Spieler nicht durch die Wände des zentralen Vierecks laufen kann
                 moveUp = 1; // Bewegung nach oben
             }
         }
         if (Greenfoot.isKeyDown("y") || Greenfoot.isKeyDown("s")) {
-            if (!(((y + speed < 230 && y + speed > 147) || (y + speed > 70 && y + speed < 113)) && x > 97 && x < 229)) {  // damit der Spieler nicht durch die Wände des zentralen Vierecks laufen kann
+            if (!(((y + speed < 230 && y + speed > 147) || (y + speed > 70 && y + speed < 113)) && x > 97 && x < 229) && y<329) {  // damit der Spieler nicht durch die Wände des zentralen Vierecks laufen kann
                 moveDown = 1; // Bewegung nach unten
             }
         }
         if (Greenfoot.isKeyDown("a")) {
-            if (!(((y < 230 && y > 147) || (y > 70 && y < 113)) && x - speed > 97 && x - speed < 229)) { // damit der Spieler nicht durch die Wände des zentralen Vierecks laufen kann
+            if (!(((y < 230 && y > 147) || (y > 70 && y < 113)) && x - speed > 97 && x - speed < 229) && x>5) { // damit der Spieler nicht durch die Wände des zentralen Vierecks laufen kann
                 moveLeft = 1; // Bewegung nach links
             }
         }
         if (Greenfoot.isKeyDown("d")) {
-            if (!(((y < 230 && y > 147) || (y > 70 && y < 113)) && x + speed > 97 && x + speed < 229)) { // damit der Spieler nicht durch die Wände des zentralen Vierecks laufen kann
+            if (!(((y < 230 && y > 147) || (y > 70 && y < 113)) && x + speed > 97 && x + speed < 229) && x<321) { // damit der Spieler nicht durch die Wände des zentralen Vierecks laufen kann
                 moveRight = 1; // Bewegung nach rechts
             }
         }
-        setLocation(x + moveRight - moveLeft, y + moveDown - moveUp);
+        setLocation(x + moveRight - moveLeft, y + moveDown - moveUp);   // führt Bewegungen au
     }
 
     public void getShooting() {

@@ -15,7 +15,7 @@ public class GridBugsKugel extends Actor
     int rotation;
     int speed = 4;
     
-    int timer = 0;
+    int explosionTimer = 0;
     
     public GridBugsKugel(int rotation){
         this.rotation = rotation;
@@ -24,30 +24,49 @@ public class GridBugsKugel extends Actor
     
     public void act()
     {
-        move(speed);
+        // Position der Kugel
+        int x = getX();
+        int y = getY();
+        
+        move(speed);    // Bewegung der Kugel
         
         if(isAtEdge()){
+            // Entfernt Kugel, wenn sie an den Rand geht
             getWorld().removeObject(this);
             Greenfoot.start();
         }
-        else if(isTouching(GridBugsSpinne.class) && timer==0){
-            setImage("Explosion Status 1.png");
-            timer++;
+        else if(((y<230 && y>147) || (y>70 && y<113)) && x>97 && x<229){
+            // Explodiert, wenn sie gegen Rand d. zentralen Vierecks trifft
+            explode();
         }
-        else if(timer%3!=0){
-            timer++;
-        }
-        else if(timer==3){
-            setImage("Explosion Status 2.png");
-            timer++;
-        }
-        else if(timer==6){
-            setImage("Explosion Status 3.png");
-            timer++;
-        }
-        else if(timer==9){
-            getWorld().removeObject(this);
+        else if(isTouching(GridBugsSpinne.class)){
+            explode();  // Kugel explodiert
         }
         
+        if(explosionTimer != 0){
+            explode(); // führt Explosion weiter, wenn sie einmal gestartet ist
+        }
+    }
+    
+    public void explode(){
+        if(explosionTimer==0){
+            setImage("Explosion Status 1.png");
+            explosionTimer++;
+        }
+        else if(explosionTimer%3!=0){
+            explosionTimer++;
+        }
+        else if(explosionTimer==3){
+            setImage("Explosion Status 2.png");
+            explosionTimer++;
+        }
+        else if(explosionTimer==6){
+            setImage("Explosion Status 3.png");
+            explosionTimer++;
+        }
+        else if(explosionTimer==9){
+            getWorld().removeObject(this);
+            return;
+        }
     }
 }

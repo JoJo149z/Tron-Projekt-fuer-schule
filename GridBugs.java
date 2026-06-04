@@ -68,6 +68,9 @@ public class GridBugs extends WorldTemplate {
         }
         if (time < 0 && !levelFinished || playerIsDead) {
             showText("Du hast verloren", 163, 250);
+            removeObjects(getObjects(GridBugsKugel.class));
+            removeObjects(getObjects(GridBugsPlayer.class));
+            removeObjects(getObjects(GridBugsSpinne.class));
             Greenfoot.delay(100);
             GameManager.resetLevel(2);  
         }
