@@ -4,6 +4,16 @@ import greenfoot.Greenfoot;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Eine base Klasse für die Lightcycles um redundanten Code zu vermeiden, da Spieler und Gegner sich in vielen Punkten ähnlich verhalten.
+ *
+ * @author Jonathan
+ * @see #act()
+ * @see #startAnimation()
+ * @see #setStartDirection(String)
+ * @see #death()
+ * @see #moveCollision()
+ */
 public class LightCyclesBase extends Actor {
 
     static int enemyAmount;
@@ -12,6 +22,7 @@ public class LightCyclesBase extends Actor {
     boolean isDead;
     boolean isEnemy;
     int timer;
+    int deathBuffer = 0;
 
     /**
      *
@@ -29,7 +40,35 @@ public class LightCyclesBase extends Actor {
         timer = 0;
     }
 
+    /**
+     * kümmert sich um die Logik beim Besiegen aller Gegner, sowie das Spawnen der Trails, die die Lightcycles hinterlassen.
+     */
     public void act() {
+        if (startAnimation()) {
+            return;
+        }
+
+        // enemyAmount konfigurieren
+        List<LightCyclesBase> enemysList = new ArrayList<>(getWorld().getObjects(LightCyclesEnemy.class));
+        enemyAmount = enemysList.size();
+
+        if (enemyAmount == 0) {
+            if (GameManager.getLevelLightCycles() <= 5) {
+                GameManager.addLevelLightCycles(1);
+            }
+            GameManager.setIsLightCyclesCompleted(true);
+            GameManager.initialiseLevelSelect();
+        }
+        //trail spawnen
+        getWorld().addObject(new ImageObject("LightcyclesTrail" + farbe + ".png"), getX(), getY());
+    }
+
+    /**
+     * Startanimation mit Countdown, damit der Spieler sich auf den Start vorbereiten kann, sowie dass löschen des Keybuffers.
+     *
+     * @return true, wenn die Animation noch läuft, false, wenn sie vorbei ist
+     */
+    protected boolean startAnimation() {
         timer += 1;
         if (timer < 40) {
             switch (timer / 10) {
@@ -38,35 +77,17 @@ public class LightCyclesBase extends Actor {
                 case 1 -> getWorld().showText("2", 163, 175);
                 default -> getWorld().showText("1", 163, 175);
             }
-            return;
+            return true;
         } else if (timer == 40) {
             Greenfoot.getKey(); //clear key buffer aber nur nach dem kurzen delay
-            getWorld().showText(null,163, 175);
+            getWorld().showText(null, 163, 175);
         }
+        return false;
 
-        // enemyAmount konfigurieren
-        List<LightCyclesBase> enemysList = new ArrayList<>(getWorld().getObjects(LightCyclesEnemy.class));
-        enemyAmount = enemysList.size();
-
-        if (!isDead) {
-            handelMovement();
-        }
-        if (enemyAmount == 0) {
-            if (GameManager.getLevelLightCycles() <= 5) {
-                GameManager.addLevelLightCycles(1);
-            }
-            GameManager.setIsLightCyclesCompleted(true);
-            GameManager.initialiseLevelSelect();
-        }
-        if (moveCollision()) {
-            death();
-            return;
-        }
-        move(speed);
-        getWorld().addObject(new ImageObject("LightcyclesTrail" + farbe + ".png"), getX(), getY());
     }
 
     /**
+     * setzt die Startrotation der Lightcycle, damit sie beim Start die richtige Richtung schauen
      *
      * @param direction as left, down, right, up
      */
@@ -90,6 +111,9 @@ public class LightCyclesBase extends Actor {
     public void handelMovement() {
     }
 
+    /**
+     * kümmert sich um die Animation und Logik bzw. Konsequenzen des Todes von Lightcycles.
+     */
     public void death() {
         isDead = true;
         speed = 0;
@@ -105,6 +129,11 @@ public class LightCyclesBase extends Actor {
         getWorld().removeObject(this);
     }
 
+    /**
+     * prüft, ob die Lightcycle in der nächsten Bewegung mit einem Trail oder einer Wand kollidieren würde, wenn sie sich in die aktuelle Richtung weiterbewegt.
+     *
+     * @return true, wenn eine Kollision stattfinden würde, false, wenn nicht.
+     */
     public Boolean moveCollision() {
         int x = 0;
         int y = 0;
