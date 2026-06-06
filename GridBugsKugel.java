@@ -1,53 +1,79 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class GridBugsKugel here.
+ * Klasse der Kugeln, welche vom Spieler abgeschossen werden können um den Gegnern schaden zuzufügen
  * 
  * @author (your name) 
- * @version (a version number or a date)
+ * @version (06.06.2026)
  */
 public class GridBugsKugel extends Actor
 {
     /**
-     * Act - do whatever the GridBugsKugel wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
+     * Steuert die abgeschossenen Kugeln und lässt sie ggf. explodieren
      */
-    int rotation;
-    int speed = 4;
+    int rotation;   // zeigt Richtung an, in die die Kugel fliegt
+    int speed = 4;  // Geschwindigkeit der Kugel
     
-    int timer = 0;
+    // Timer für Explosionen der Kugel
+    int explosionTimer = 0;
     
     public GridBugsKugel(int rotation){
+        // initialisiert Kugel und setzt die Rotation der Kugel, sodass sie in die entsprechende Richtung fliegt
         this.rotation = rotation;
         setRotation(rotation);
     }
     
     public void act()
     {
-        move(speed);
+        // Position der Kugel
+        int x = getX();
+        int y = getY();
+        
+        move(speed); // Bewegung der Kugel
         
         if(isAtEdge()){
+            // Entfernt Kugel, wenn sie an den Rand geht
             getWorld().removeObject(this);
-            Greenfoot.start();
+            return;
         }
-        else if(isTouching(GridBugsSpinne.class) && timer==0){
+        else if(((y<230 && y>147) || (y>70 && y<113)) && x>97 && x<229){
+            // Explodiert, wenn sie gegen Rand d. zentralen Vierecks trifft
+            explode();
+        }
+        else if(isTouching(GridBugsSpinne.class)){
+            // Kugel explodiert, wenn sie Spinne trifft
+            explode(); 
+        }
+        else if(explosionTimer != 0){
+            // führt Explosion weiter, wenn sie einmal gestartet ist
+            explode();
+        }
+    }
+    
+    public void explode(){
+        if(explosionTimer==0){
+            // Startet die Explosion und setzt das erste entsprechende Bild
             setImage("Explosion Status 1.png");
-            timer++;
+            explosionTimer++;
         }
-        else if(timer%3!=0){
-            timer++;
+        else if(explosionTimer%3!=0){
+            // erhöht kontinuierlich den explosionTimer
+            explosionTimer++;
         }
-        else if(timer==3){
+        else if(explosionTimer==3){
+            // setzt das zwiete Bild der Explosion
             setImage("Explosion Status 2.png");
-            timer++;
+            explosionTimer++;
         }
-        else if(timer==6){
+        else if(explosionTimer==6){
+            // setzt das dritte Bild der Explosion
             setImage("Explosion Status 3.png");
-            timer++;
+            explosionTimer++;
         }
-        else if(timer==9){
+        else if(explosionTimer==9){
+            // entfernt die Kugel am Ende der Explosion
             getWorld().removeObject(this);
+            return;
         }
-        
     }
 }
