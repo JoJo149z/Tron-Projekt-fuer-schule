@@ -18,7 +18,6 @@ public class GameManager {
     private static int levelLightCycles = 1;
     private static boolean isLightCyclesCompleted = false;
     private static boolean isGridBugsCompleted = false;
-    private static boolean musicPlaying = false;
     private static GreenfootSound backgroundMusic = new GreenfootSound("gameMusic.wav");
 
     public static void fullReset() {
@@ -51,10 +50,9 @@ public class GameManager {
 
     public static void startMusicLoop() {
 
-        if (!musicPlaying) {
+        if (!backgroundMusic.isPlaying()) {
             backgroundMusic.playLoop();
             backgroundMusic.setVolume(20);
-            musicPlaying = true;
         }
     }
 
