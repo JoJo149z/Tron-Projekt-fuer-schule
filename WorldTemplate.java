@@ -19,8 +19,12 @@ public class WorldTemplate extends World {
         super(326, 349, 1, false);
     }
 
+    /**
+     * Zeigt die Punkte, den Highscore und die verbleibenden Leben an
+     *
+     * @see #showText(String, int, int)
+     */
     public void showGameInfo() {
-        // zeigt den Highscore, die Punkte und die verbleibenden Leben an
         showText(Integer.toString(GameManager.getPunkte()), 50, 50);
         showText(Integer.toString(GameManager.readHighscore()), 165, 50);
         showText("Leben: " + GameManager.getLeben(), 270, 50);

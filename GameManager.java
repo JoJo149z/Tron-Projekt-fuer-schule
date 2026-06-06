@@ -25,6 +25,7 @@ public class GameManager {
         levelGridBugs = 1;
         leben = 3;
         levelLightCycles = 1;
+        startMusicLoop();
         softReset();
     }
 
@@ -54,6 +55,10 @@ public class GameManager {
             backgroundMusic.playLoop();
             backgroundMusic.setVolume(20);
         }
+    }
+
+    public static void stopMusicLoop() {
+        backgroundMusic.stop();
     }
 
     public static void highscoreScreen(int punkte) {
