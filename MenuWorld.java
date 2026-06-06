@@ -31,7 +31,7 @@ public class MenuWorld extends WorldTemplate {
     }
 
     public void act() {
-        if (GameManager.getLeben() > 1) {
+        if (GameManager.getLeben() > 0) {
             showGameInfo();
         }
 
