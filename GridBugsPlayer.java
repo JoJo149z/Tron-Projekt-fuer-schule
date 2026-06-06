@@ -60,7 +60,7 @@ public class GridBugsPlayer extends Actor {
             setImage("Explosion Status 3.png");
             timer++;
         } else if (timer == 9) {
-            getWorldOfType(GridBugs.class).setPlayerIsDead();
+            getWorldOfType(GridBugs.class).playerIsDead = true;
         }
 
         if (isTouching(GridBugsGoal.class) && getWorldOfType(GridBugs.class).time >= 0) {

@@ -33,7 +33,7 @@ public class GridBugsKugel extends Actor
         if(isAtEdge()){
             // Entfernt Kugel, wenn sie an den Rand geht
             getWorld().removeObject(this);
-            Greenfoot.start();
+            return;
         }
         else if(((y<230 && y>147) || (y>70 && y<113)) && x>97 && x<229){
             // Explodiert, wenn sie gegen Rand d. zentralen Vierecks trifft
@@ -42,8 +42,7 @@ public class GridBugsKugel extends Actor
         else if(isTouching(GridBugsSpinne.class)){
             explode();  // Kugel explodiert
         }
-        
-        if(explosionTimer != 0){
+        else if(explosionTimer != 0){
             explode(); // führt Explosion weiter, wenn sie einmal gestartet ist
         }
     }
