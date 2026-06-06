@@ -15,19 +15,19 @@ public class GridBugsSpinne extends Actor
     int deathTimer = 0;
     int movingTimer = 0;
     int cloningTimer = 0;
-    int speed;
+    int speed;  // Geschwindigkeit der Spinne
     int backPushPlayer = 7; // wie stark eine Spinne von dem Player verschoben werden kann
     int backPushSpider = 1; // wie stark eine Spinne von einer Spinne verschoben werden kann
     
     public GridBugsSpinne(int speed){
-        this.speed = speed;
+        this.speed = speed; // Initialisiert eine neue Spinne mit der entsprechenden Geschwindigkeit
     }
     
     public void act()
     {
         movingTimer++;
         if(movingTimer%2==0){
-            getMoving();        // bewegt sich nur unregelm. (für bessere Regulation der Geschwindigkeit)
+            getMoving();        // bewegt sich nur alle 2 acts (für bessere Regulation der Geschwindigkeit)
         }
         
         if(isTouching(GridBugsKugel.class)){
@@ -42,6 +42,7 @@ public class GridBugsSpinne extends Actor
             // Spinne explodiert 6 acts nach Berührung mit der Kugel
             GameManager.addPunkte(10);
             getWorld().removeObject(this);
+            return;
         }
         
         cloningTimer++;
@@ -51,21 +52,24 @@ public class GridBugsSpinne extends Actor
                 cloneSpider();
             }
         }
-    }
-    
-    public void getMoving(){
+        
+        // Holt Position des Spielers
         int playerX = getWorldOfType(GridBugs.class).playerX;
         int playerY = getWorldOfType(GridBugs.class).playerY;
         
+        // Position der Spinne selbst
         int x = getX();
         int y = getY();
         
+        // Unterschiede der Positionen von Spinne und Spieler in X- und Y-Richtung
         int difX = playerX-x;
         int difY = playerY-y;
         
-        
         // Spinne springt zurück, wenn sie einen Spieler berührt
-        if(!(x+backPushPlayer>100 && x-backPushPlayer<226 && y+backPushPlayer>75 && y-backPushPlayer<200)){
+        if(!(x+backPushPlayer>100 && x-backPushPlayer<226 && y+backPushPlayer>75 && y-backPushPlayer<200)){     // Passt auf, dass Spinne nicht durch die Wand des Vierecks zurückgeworfen wird
+            /**
+             * wirft die Spinne nach berührung  mit dem Spieler zurück, sodass immer nur einmal Leben abgezogen werden
+               */
             if(isTouching(GridBugsPlayer.class)){
                 if(difX<=0){
                     if(difY<=0){
@@ -82,10 +86,22 @@ public class GridBugsSpinne extends Actor
                 }
             }
         }
+    }
+    
+    public void getMoving(){
+        // Holt Position des Spielers
+        int playerX = getWorldOfType(GridBugs.class).playerX;
+        int playerY = getWorldOfType(GridBugs.class).playerY;
         
-        x = getX();
-        y = getY();
-        if(x+speed>100 && x-speed<226 && y+speed>75 && y-speed<200){ // Falls am Rand des Vierecks
+        // Position der Spinne selbst
+        int x = getX();
+        int y = getY();
+        
+        // Unterschiede der Positionen von Spinne und Spieler in X- und Y-Richtung
+        int difX = playerX-x;
+        int difY = playerY-y;
+        
+        if(x+speed>100 && x-speed<226 && y+speed>75 && y-speed<200){ // Falls am Rand des Vierecks (Damit Spinne nicht in die Wand des zentralen Vierecks kommt)
             if(x<100){
                 if(y>=140){
                     setLocation(x, y+speed);
@@ -112,6 +128,7 @@ public class GridBugsSpinne extends Actor
                 }
             }
         } else{ // falls nicht am Rand des zentralen Vierecks
+            // Spinne bewegt sich immer in die Richtung (x oder y) in der sie weiter entfernt vom Spieler ist
             if(difX>difY){
                 if(difX>0){
                     setLocation(x+speed, y);
