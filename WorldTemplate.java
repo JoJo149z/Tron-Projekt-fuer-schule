@@ -15,11 +15,12 @@ public class WorldTemplate extends World {
 
 
     public WorldTemplate() {
-        // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
+        // Erstellt die Welt ohne festen Rand in der Größe 326x349
         super(326, 349, 1, false);
     }
 
     public void showGameInfo() {
+        // zeigt den Highscore, die Punkte und die verbleibenden Leben an
         showText(Integer.toString(GameManager.getPunkte()), 50, 50);
         showText(Integer.toString(GameManager.readHighscore()), 165, 50);
         showText("Leben: " + GameManager.getLeben(), 270, 50);

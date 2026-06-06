@@ -3,8 +3,8 @@ import greenfoot.Greenfoot;
 /**
  * Write a description of class GridBugs here.
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author ()
+ * @version (06.06.2026)
  */
 public class GridBugs extends WorldTemplate {
 
