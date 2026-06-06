@@ -16,6 +16,7 @@ public class MenuWorld extends WorldTemplate {
      *
      */
     public MenuWorld(boolean LightCycles, boolean GridBugs) {
+        GameManager.startMusicLoop();
         if (LightCycles) {
             addObject(new ImageObject("MenuWorldBluePart.png"), 60, 190);
         }

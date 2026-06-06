@@ -1,4 +1,5 @@
 import greenfoot.Greenfoot;
+import greenfoot.GreenfootSound;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -17,7 +18,8 @@ public class GameManager {
     private static int levelLightCycles = 1;
     private static boolean isLightCyclesCompleted = false;
     private static boolean isGridBugsCompleted = false;
-
+    private static boolean musicPlaying = false;
+    private static GreenfootSound backgroundMusic = new GreenfootSound("gameMusic.wav");
 
     public static void fullReset() {
         punkte = 0;
@@ -45,6 +47,15 @@ public class GameManager {
             highscoreScreen(punkte);
         }
 
+    }
+
+    public static void startMusicLoop() {
+
+        if (!musicPlaying) {
+            backgroundMusic.playLoop();
+            backgroundMusic.setVolume(20);
+            musicPlaying = true;
+        }
     }
 
     public static void highscoreScreen(int punkte) {
