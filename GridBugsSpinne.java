@@ -1,9 +1,10 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 /**
- * Write a description of class GridBugsSpinne here.
+ * Klasse der Spinnen
+ * Steuert die Spinnen
  * 
  * @author (your name) 
- * @version (a version number or a date)
+ * @version (07.06.2026)
  */
 public class GridBugsSpinne extends Actor
 {
@@ -18,6 +19,16 @@ public class GridBugsSpinne extends Actor
     int speed;  // Geschwindigkeit der Spinne
     int backPushPlayer = 7; // wie stark eine Spinne von dem Player verschoben werden kann
     int backPushSpider = 1; // wie stark eine Spinne von einer Spinne verschoben werden kann
+    
+    /**
+     * gibt an, ob und wenn ja in welche Richtung die Spinne weitergehen muss:
+     * 1) oben
+     * 2) rechts
+     * 3) unten
+     * 4) links
+       */
+    int continueMovement = 0;
+    
     
     public GridBugsSpinne(int speed){
         this.speed = speed; // Initialisiert eine neue Spinne mit der entsprechenden Geschwindigkeit
@@ -91,6 +102,14 @@ public class GridBugsSpinne extends Actor
                 }
             }
         }
+        
+        if(x>86 && x<240 && y>75 && y<200){
+            /** 
+             * löscht Spinne, falls sie aus irgendeinem Fehler im inneren Viereck landet
+               */
+            getWorld().removeObject(this);
+            return;
+        }
     }
     
     public void getMoving(){
@@ -106,45 +125,117 @@ public class GridBugsSpinne extends Actor
         int difX = playerX-x;
         int difY = playerY-y;
         
-        if(x+speed>95 && x-speed<231 && y+speed>70 && y-speed<205){ // Bewegung falls am Rand des Vierecks (Damit Spinne nicht in die Wand des zentralen Vierecks kommt)
-            if(x<100){
-                if(y>=140){
-                    setLocation(x, y+speed);
+        /**
+         * Spinnen bewegen sich entlang derjenigen Achse,
+         * auf der der Unterschied zur Position des Spielers am größten ist.
+         * Falls das Viereck im Weg ist, bewegen sich die Spinnen entlang der anderen Achse
+           */
+        if(continueMovement==0){
+            if(Math.abs(difX)>Math.abs(difY)){  // entscheidet, welche Achse die höchste Different hat
+                if(difX>0){
+                    if(!(x+speed>86 && x+speed<240 && y>75 && y<200)){
+                        setLocation(x+speed, y);    // Bewegung nach rechts
+                        if(x>211){
+                            continueMovement = 2;   // ermöglicht, dass die Spinnen um die Ecken kommen
+                        }
+                    } else{
+                        if(difY>0){
+                            setLocation(x, y+speed);    // Bewegung nach unten
+                            if(y>185){
+                                continueMovement = 3;   // ermöglicht, dass die Spinnen um die Ecken kommen
+                            }
+                        } else{
+                            setLocation(x, y-speed);    // Bewegung nach oben
+                            if(y<90){
+                                continueMovement = 1;   // ermöglicht, dass die Spinnen um die Ecken kommen
+                            }
+                        }
+                    }
                 } else{
-                    setLocation(x, y-speed);
+                    if(!(x-speed>86 && x-speed<240 && y>75 && y<200)){
+                        setLocation(x-speed, y);    // Bewegung nach links
+                        if(x<115){
+                            continueMovement = 4;   // ermöglicht, dass die Spinnen um die Ecken kommen
+                        }
+                    } else{
+                        if(difY>0){
+                            setLocation(x, y+speed);    // Bewegung nach unten
+                            if(y>185){
+                                continueMovement = 3;   // ermöglicht, dass die Spinnen um die Ecken kommen
+                            }
+                        } else{
+                            setLocation(x, y-speed);    // Bewegung nach oben
+                            if(y<90){
+                                continueMovement = 1;   // ermöglicht, dass die Spinnen um die Ecken kommen
+                            }
+                        }
+                    }
                 }
-            } else if(x>=226){
-                if(y>140){
-                    setLocation(x, y+speed);
+            } else{
+                if(difY>0){
+                    if(!(x>86 && x<240 && y+speed>75 && y+speed<200)){
+                        setLocation(x, y+speed);    // Bewegung nach unten
+                        if(y>185){
+                            continueMovement = 3;   // ermöglicht, dass die Spinnen um die Ecken kommen
+                        }
+                    } else{
+                        if(difX>0){
+                            setLocation(x+speed, y);    // Bewegung nach rechts
+                            if(x>210){
+                                continueMovement = 2;   // ermöglicht, dass die Spinnen um die Ecken kommen
+                            }
+                        } else{
+                            setLocation(x-speed, y);    // Bewegung nach links
+                            if(x<115){
+                                continueMovement = 4;   // ermöglicht, dass die Spinnen um die Ecken kommen
+                            }
+                        }
+                    }
                 } else{
-                    setLocation(x, y-speed);
-                }
-            } else if(y<=80){
-                if(x>163){
-                    setLocation(x, y+speed);
-                } else{
-                    setLocation(x, y-speed);
-                }
-            } else if(y>=200){
-                if(difX>163){
-                    setLocation(x+speed, y);
-                } else{
-                    setLocation(x-speed, y);
+                    if(!(x>86 && x<240 && y-speed>75 && y-speed<200)){
+                        setLocation(x, y-speed);    // Bewegung nach oben
+                        if(y<90){
+                            continueMovement = 1;   // ermöglicht, dass die Spinnen um die Ecken kommen
+                        }
+                    } else{
+                        if(difX>0){
+                            setLocation(x+speed, y);    // Bewegung nach rechts
+                            if(x>210){
+                                continueMovement = 2;   // ermöglicht, dass die Spinnen um die Ecken kommen
+                            }
+                        } else{
+                            setLocation(x-speed, y);    // Bewegung nach links
+                            if(x<115){
+                                continueMovement = 4;   // ermöglicht, dass die Spinnen um die Ecken kommen
+                            }
+                        }
+                    }
                 }
             }
-        } else{ // falls nicht am Rand des zentralen Vierecks
-            // Spinne bewegt sich immer in die Richtung (x oder y) in der sie weiter entfernt vom Spieler ist
-            if(difX>difY){
-                if(difX>0){
-                    setLocation(x+speed, y);
-                } else {
-                    setLocation(x, y-speed);
+        } else{
+            /**
+             * Auslöser: Spinne ist noch am Rand des inneren Viereckes und ist kurz vor der Ecke
+             * Richtung der Spinne wird kurz beibehalten, bis die Ecke erreicht ist
+               */
+            if(continueMovement == 1){
+                setLocation(x, y-speed);
+                if(y<65){
+                    continueMovement = 0;
                 }
-            } else {
-                if(difY>0){
-                    setLocation(x, y+speed);
-                } else {
-                    setLocation(x-speed, y);
+            } else if(continueMovement == 2){
+                setLocation(x+speed, y);
+                if(x>250){
+                    continueMovement = 0;
+                }
+            } else if(continueMovement == 3){
+                setLocation(x, y+speed);
+                if(y>210){
+                    continueMovement = 0;
+                }
+            } else if(continueMovement == 4){
+                setLocation(x-speed, y);
+                if(x<76){
+                    continueMovement = 0;
                 }
             }
         }

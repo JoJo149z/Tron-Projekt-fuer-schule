@@ -117,11 +117,11 @@ public class GridBugs extends WorldTemplate {
         
         addSpinne(30, 180, spiderSpeed);
         addSpinne(80, 190, spiderSpeed);
-        addSpinne(246, 19, spiderSpeed);
+        addSpinne(246, 190, spiderSpeed);
         addSpinne(296, 180, spiderSpeed);
         
         // legt fest, wie lange der Spieler Zeit hat
-        time = 500;
+        time = 150;
     }
 
     public void addSetupLevel2() {
