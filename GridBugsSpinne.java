@@ -39,7 +39,10 @@ public class GridBugsSpinne extends Actor
         }
         
         if(deathTimer == 6){
-            // Spinne explodiert 6 acts nach Berührung mit der Kugel
+            /** 
+             * Spinne wird 6 acts nach Berührung mit der Kugel entfernt
+             * (da die Kugel schon die Ränder der Spinne berührt) => Kugel explodiert näher bei der Spinne
+               */
             GameManager.addPunkte(10);
             getWorld().removeObject(this);
             return;
@@ -47,8 +50,10 @@ public class GridBugsSpinne extends Actor
         
         cloningTimer++;
         if((cloningTimer+1)%30==0){
+            // Alle 30 acts gibt es für jede Spinne die Chance, dass sie sich klonen könnte
             int randomNumber = Greenfoot.getRandomNumber(10);
             if(randomNumber == 0){
+                // in 10% der Fälle wird die Spinne geklont
                 cloneSpider();
             }
         }
@@ -101,7 +106,7 @@ public class GridBugsSpinne extends Actor
         int difX = playerX-x;
         int difY = playerY-y;
         
-        if(x+speed>100 && x-speed<226 && y+speed>75 && y-speed<200){ // Falls am Rand des Vierecks (Damit Spinne nicht in die Wand des zentralen Vierecks kommt)
+        if(x+speed>95 && x-speed<231 && y+speed>70 && y-speed<205){ // Bewegung falls am Rand des Vierecks (Damit Spinne nicht in die Wand des zentralen Vierecks kommt)
             if(x<100){
                 if(y>=140){
                     setLocation(x, y+speed);
@@ -146,11 +151,19 @@ public class GridBugsSpinne extends Actor
     }
     
     public void pushBack(){
+        /**
+         * stößt 2 Spinnen voneinander ab, wenn Sie sich gegenseitig berühren
+           */
+        
+        // Position der Spinne
         int x = getX();
         int y = getY();
+        
         if((movingTimer)%4==0){
-            if(!(x+backPushSpider>100 && x-backPushSpider<226 && y+backPushSpider>75 && y-backPushSpider<200)){
+            // kann nur alle 2 Bewegungen Passieren
+            if(!(x+backPushSpider>100 && x-backPushSpider<226 && y+backPushSpider>75 && y-backPushSpider<200)){ // damit Spinne nicht in das innere Viereck gestoßen werden kann
                 if(isTouching(GridBugsSpinne.class)){
+                    // Spinne wird in eine Zufällige Richtung abgestoßen
                     double randomNumber = Math.random();
                     if(randomNumber<0.25){
                         setLocation(x+backPushSpider, y+backPushSpider);
@@ -167,13 +180,22 @@ public class GridBugsSpinne extends Actor
     }
     
     public void cloneSpider(){
+        /**
+         * Dupliziert eine Spinne
+           */
+        
+        // Position der Spinne
         int x = getX();
         int y = getY();
         
+        // Entfernung zwischen der Original
         int cloneBackPush = 20;
-        if(!(x+cloneBackPush>100 && x-cloneBackPush<226 && y+cloneBackPush>75 && y-cloneBackPush<200)){
-            getWorldOfType(GridBugs.class).addSpinne(getX()+20, getY(), speed);
-            setLocation(x-20, y);
+        if(!(x+cloneBackPush>100 && x-cloneBackPush<226 && y+cloneBackPush>75 && y-cloneBackPush<200)){ // damit eine Spinne nicht innerhalb des zentralen Vierecks geklont werden kann
+            // erstellt die geklonte Spinne
+            getWorldOfType(GridBugs.class).addSpinne(getX()+cloneBackPush, getY(), speed);
+            
+            // erneuert die Position der alten Spinne (damit die Spinnen nicht aufeinander sind)
+            setLocation(x-cloneBackPush, y);
         }
     }
 }
