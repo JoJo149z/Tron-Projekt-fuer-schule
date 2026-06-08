@@ -9,9 +9,9 @@ import greenfoot.Greenfoot;
  */
 public class GridBugsPlayer extends Actor {
     /**
-     * Klasse des Spielers
+     * Klasse des Spielers.
      * Steuert den Spieler, seine Bewegungen, seine Leben und seine Schüsse
-     * 
+     *
      */
 
     boolean stillRight = false; // Prüft, ob die rechte Pfeiltaste nach Schuss des Spielers noch immer gedrückt ist
@@ -34,7 +34,7 @@ public class GridBugsPlayer extends Actor {
                 sleepFor(1);
             } else {
                 GameManager.addLevelGridBugs(1);  // erhöht das GridBugs Level
-                GameManager.addPunkte(getWorldOfType(GridBugs.class).time*10+leben);  // erhöht die Punkte des Spielers 
+                GameManager.addPunkte(getWorldOfType(GridBugs.class).time * 10 + leben);  // erhöht die Punkte des Spielers
                 GameManager.setIsGridBugsCompleted(true);   // speichert, dass GridBugs erfolgreich gemeistert wurde
                 GameManager.initialiseLevelSelect();    // führt zurück zur Menu-World
             }
@@ -43,7 +43,7 @@ public class GridBugsPlayer extends Actor {
         // speichert Position des Spielers in GridBugsWorld
         getWorldOfType(GridBugs.class).playerX = getX();
         getWorldOfType(GridBugs.class).playerY = getY();
-        
+
         getMovement();  // prüft, ob sich der Spieler bewegen muss und führt diese Bewegungen ggf. aus
 
         getShooting();  // prüft ob Spieler schießen muss und führt den Schuss ggf. aus
@@ -81,34 +81,34 @@ public class GridBugsPlayer extends Actor {
     public void getMovement() {
         /**
          * prüft, ob sich der Spieler bewegen muss und führt diese Bewegungen ggf. aus
-           */
-        
+         */
+
         // Position des Spielers
         int x = getX();
         int y = getY();
-        
+
         // halten Fest, welche Bewegungen ausgeführt werden müssen
         int moveUp = 0;
         int moveDown = 0;
         int moveLeft = 0;
         int moveRight = 0;
         if (Greenfoot.isKeyDown("w")) {
-            if (!(((y - speed < 230 && y - speed > 147) || (y - speed > 70 && y - speed < 113)) && x > 97 && x < 229) && y>20) { // damit der Spieler nicht durch die Wände des zentralen Vierecks laufen kann
+            if (!(((y - speed < 230 && y - speed > 147) || (y - speed > 70 && y - speed < 113)) && x > 97 && x < 229) && y > 20) { // damit der Spieler nicht durch die Wände des zentralen Vierecks laufen kann
                 moveUp = 1; // Bewegung nach oben
             }
         }
         if (Greenfoot.isKeyDown("y") || Greenfoot.isKeyDown("s")) {
-            if (!(((y + speed < 230 && y + speed > 147) || (y + speed > 70 && y + speed < 113)) && x > 97 && x < 229) && y<329) {  // damit der Spieler nicht durch die Wände des zentralen Vierecks laufen kann
+            if (!(((y + speed < 230 && y + speed > 147) || (y + speed > 70 && y + speed < 113)) && x > 97 && x < 229) && y < 329) {  // damit der Spieler nicht durch die Wände des zentralen Vierecks laufen kann
                 moveDown = 1; // Bewegung nach unten
             }
         }
         if (Greenfoot.isKeyDown("a")) {
-            if (!(((y < 230 && y > 147) || (y > 70 && y < 113)) && x - speed > 97 && x - speed < 229) && x>5) { // damit der Spieler nicht durch die Wände des zentralen Vierecks laufen kann
+            if (!(((y < 230 && y > 147) || (y > 70 && y < 113)) && x - speed > 97 && x - speed < 229) && x > 5) { // damit der Spieler nicht durch die Wände des zentralen Vierecks laufen kann
                 moveLeft = 1; // Bewegung nach links
             }
         }
         if (Greenfoot.isKeyDown("d")) {
-            if (!(((y < 230 && y > 147) || (y > 70 && y < 113)) && x + speed > 97 && x + speed < 229) && x<321) { // damit der Spieler nicht durch die Wände des zentralen Vierecks laufen kann
+            if (!(((y < 230 && y > 147) || (y > 70 && y < 113)) && x + speed > 97 && x + speed < 229) && x < 321) { // damit der Spieler nicht durch die Wände des zentralen Vierecks laufen kann
                 moveRight = 1; // Bewegung nach rechts
             }
         }
@@ -118,9 +118,9 @@ public class GridBugsPlayer extends Actor {
     public void getShooting() {
         /**
          * prüft ob Spieler schießen muss und führt den Schuss ggf. aus
-           */
-        
-        
+         */
+
+
         if (Greenfoot.isKeyDown("right")) {
             if (!stillRight) {  // prüft, ob Taste erstes mal gedrückt wurde oder im act zuvor auch schon (damit immer nur eine Kugel abgeschossen wird)
                 shoot(0);   // Schuss nach rechts
@@ -158,8 +158,8 @@ public class GridBugsPlayer extends Actor {
     public void shoot(int rotation) {
         /**
          * erzeugt eine Kugel mit der entsprechenden Rotation, sodass sie in die richtige Richtung fliegt
-           */
-        
+         */
+
         getWorld().addObject(new GridBugsKugel(rotation), getX() - 10, getY() - 5);
     }
 }
