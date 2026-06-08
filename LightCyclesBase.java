@@ -25,6 +25,7 @@ public class LightCyclesBase extends Actor {
     int deathBuffer = 0;
 
     /**
+     * Constructor for objects of class LightCyclesBase
      *
      * @param speed             != 0
      * @param isEnemy           true/false
@@ -49,7 +50,7 @@ public class LightCyclesBase extends Actor {
         }
 
         // enemyAmount konfigurieren
-        List<LightCyclesBase> enemysList = new ArrayList<>(getWorld().getObjects(LightCyclesEnemy.class));
+        List<LightCyclesEnemy> enemysList = new ArrayList<>(getWorld().getObjects(LightCyclesEnemy.class));
         enemyAmount = enemysList.size();
 
         if (enemyAmount == 0) {
@@ -108,11 +109,15 @@ public class LightCyclesBase extends Actor {
         }
     }
 
+    //handleMovent für Unterklassen
     public void handelMovement() {
     }
 
     /**
      * kümmert sich um die Animation und Logik bzw. Konsequenzen des Todes von Lightcycles.
+     *
+     * @see GameManager#addPunkte(int)
+     * @see GameManager#resetLevel(int)
      */
     public void death() {
         isDead = true;

@@ -6,10 +6,12 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 /**
- * Write a description of class GameManager here.
+ * Zentrale Verwaltungsklasse des Spiels.
+ * Der GameManager steuert den gesamten Spielzustand, einschließlich Punkte,
+ * Leben, Levelprogression, Spielmodi sowie Audio- und Reset-Logik.
+ * Außerdem verwaltet er den Wechsel zwischen Menüs und Spielwelten.
+ * @author Jonathan
  *
- * @author (your name)
- * @version (a version number or a date)
  */
 public class GameManager {
     private static int punkte;

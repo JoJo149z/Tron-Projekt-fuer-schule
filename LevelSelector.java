@@ -33,7 +33,9 @@ public class LevelSelector extends Actor {
         }
 
         String key = Greenfoot.getKey();
-        if (!selectionStarted) {
+        if (selectionStarted) {
+            select();
+        } else {
             if (key != null) {
                 if ("a".equals(key)) {
                     turn(-90);
@@ -43,33 +45,32 @@ public class LevelSelector extends Actor {
                 }
                 if ("w".equals(key)) {
                     move(100);
-                    if (getIntersectingObjects(ImageObject.class).isEmpty()) {
-                        move(-100);
+
+                    boolean foundObject = !getIntersectingObjects(ImageObject.class).isEmpty();
+                    move(-100);
+
+                    if (!foundObject) {
                         return;
-                    } else {
-                        move(-100);
-                        selectionStarted = true;
                     }
+
+                    selectionStarted = true;
+
                 }
                 if ("r".equals(key)) {
                     GameManager.fullReset();
                 }
             }
-        } else {
-            select();
         }
     }
 
     //wenn 50 pixel bewegt dann ImageObject entfernen
     public void select() {
         if ((getX() <= 60 || (getX() >= 270) || getY() <= 100 || getY() >= 280)) {
-                Greenfoot.delay(15);
+            Greenfoot.delay(15);
             getIntersectingObjects(ImageObject.class).forEach(imageObject -> {
                 switch (imageObject.getImageName()) {
                     case "MenuWorldBluePart.png" -> GameManager.initialiseLightCycles();
                     case "MenuWorldGreenPart.png" -> GameManager.initialiseGridBugs();
-                    /*case "MenuWorldOrangePart.png" -> Greenfoot.setWorld(new MenuWorld());
-                    case "MenuWorldRedPart.png" -> Greenfoot.setWorld(new MenuWorld());*/
                 }
             });
         } else {
