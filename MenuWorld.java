@@ -17,7 +17,8 @@ public class MenuWorld extends WorldTemplate {
 
     /**
      * Constructor for MenuWorld.
-     * wenn eines der parameter true ist, dann wird auch ein {@link LevelSelector} initialisiert, da ausgegangen wird das es sich um Level Select handelt.
+     * Kreiert die entsprechenden Bilder für die Spiele nach angabe der Parameter.
+     * Wenn eines der parameter true ist, dann wird auch ein {@link LevelSelector} initialisiert, da ausgegangen wird das es sich um Level Select handelt.
      *
      * @param LightCycles soll für das Level Select die LightCyclesmap/-image geladen werden?
      * @param GridBugs    soll für das Level Select die GridBugsmap/-image geladen werden?
@@ -32,8 +33,9 @@ public class MenuWorld extends WorldTemplate {
         if (LightCycles || GridBugs) {
             addObject(new LevelSelector(), 165, 190);
         }
-        //addObject(new ImageObject("MenuWorldOrangePart.png"), 270, 190);
-        //ddObject(new ImageObject("MenuWorldRedPart.png"), 165, 280);
+        /* für zukünftige Spiele
+        addObject(new ImageObject("MenuWorldOrangePart.png"), 270, 190);
+        ddObject(new ImageObject("MenuWorldRedPart.png"), 165, 280); */
         setPaintOrder(LevelSelector.class, ImageObject.class); //damit der LevelSelector über den ImageObjects liegt.
     }
 
