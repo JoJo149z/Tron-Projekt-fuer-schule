@@ -29,6 +29,9 @@ public class LightCycles extends WorldTemplate {
     private void prepare() {
         int enemySpeed = 1;
         int playerSpeed = 1;
+        if (difficulty > 8) {
+            difficulty = 8;
+        }
         if (difficulty > 4) { //ab difficulty 5 werden bei jedes zweite mal spielen. die Geschwindigkeiten erhöht.
             if (difficulty % 2 == 0) {
                 enemySpeed = (difficulty - 2) / 2;

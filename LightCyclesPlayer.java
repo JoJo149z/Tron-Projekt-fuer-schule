@@ -38,7 +38,7 @@ public class LightCyclesPlayer extends LightCyclesBase {
         if (moveCollision()) { //ein Buffer für ein paar Frames, damit der Spieler sich retten kann, wenn gegen eine Wand/trail fährt.
 
             if (deathBuffer == 0) {
-                deathBuffer = 5; // ca. 0,2 Sekunden
+                deathBuffer = 6; // ca. 0,2 Sekunden
             }
 
             deathBuffer--;

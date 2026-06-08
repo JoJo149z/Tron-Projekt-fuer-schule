@@ -117,6 +117,7 @@ public class LightCyclesBase extends Actor {
     public void death() {
         isDead = true;
         speed = 0;
+        GameManager.playExplosion1(0);
         setImage(("LightcyclesExplosion1.png"));
         Greenfoot.delay(5);
         setImage(("LightcyclesExplosion2.png"));
@@ -157,8 +158,8 @@ public class LightCyclesBase extends Actor {
                 dx = 1;
                 break;
         }
-        for (int i = 0; i < 3; i++) {
-            for (int j = -2; j < 2; j++) {
+        for (int i = 0; i < 3; i++) { //i ist für pixel for ihm
+            for (int j = -2; j < 2; j++) { //j ist für die breite seines autos sozusagen
                 if (getOneObjectAtOffset(x + i * dx + j * Math.abs(dy), y - i * dy + j * Math.abs(dx), ImageObject.class) != null) {
                     return true;
                 }

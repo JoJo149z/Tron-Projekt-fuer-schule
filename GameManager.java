@@ -18,7 +18,8 @@ public class GameManager {
     private static int levelLightCycles = 1;
     private static boolean isLightCyclesCompleted = false;
     private static boolean isGridBugsCompleted = false;
-    private static GreenfootSound backgroundMusic = new GreenfootSound("gameMusic.wav");
+    private static final GreenfootSound backgroundMusic = new GreenfootSound("gameMusic.wav");
+    private static final GreenfootSound explosion1 = new GreenfootSound("explosion1.wav");
 
     public static void fullReset() {
         punkte = 0;
@@ -59,6 +60,11 @@ public class GameManager {
 
     public static void stopMusicLoop() {
         backgroundMusic.stop();
+    }
+
+    public static void playExplosion1(int volume) {
+        explosion1.play();
+        explosion1.setVolume(volume != 0 ? volume : 70);
     }
 
     public static void highscoreScreen(int punkte) {
