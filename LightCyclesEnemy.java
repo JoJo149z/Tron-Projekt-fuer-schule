@@ -20,7 +20,7 @@ public class LightCyclesEnemy extends LightCyclesBase {
     }
 
     /**
-     * führt die act Methode von LightCyclesBase aus{@link #LightCyclesBase}, {@link #handelMovement} und {@link #moveCollision} werden hier aufgerufen, damit der Gegner sich bewegen kann und stirbt, wenn er gegen eine Wand oder einen Trail fährt.
+     * Führt die act Methode von LightCyclesBase aus{@link #LightCyclesBase}, {@link #handelMovement} und {@link #moveCollision} werden hier aufgerufen, damit der Gegner sich bewegen kann und stirbt, wenn er gegen eine Wand oder einen Trail fährt.
      *
      * @see #handelMovement()
      * @see #moveCollision()

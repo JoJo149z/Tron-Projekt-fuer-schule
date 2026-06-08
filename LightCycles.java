@@ -1,7 +1,7 @@
 /**
- * Write a description of class LightCycles here.
+ * Welt für LightCycles
  *
- * @author (your name)
+ * @author Jonathan
  * @version (a version number or a date)
  */
 public class LightCycles extends WorldTemplate {
@@ -11,6 +11,7 @@ public class LightCycles extends WorldTemplate {
     /**
      * Constructor for objects of class LightCycles.
      *
+     * @param difficulty !=0, je höher, desto schwerer
      */
     public LightCycles(int difficulty) {
         this.difficulty = difficulty;
@@ -18,6 +19,9 @@ public class LightCycles extends WorldTemplate {
         prepare();
     }
 
+    /**
+     * führt {@link #showGameInfo()} aus.
+     */
     public void act() {
         showGameInfo();
     }
@@ -29,7 +33,7 @@ public class LightCycles extends WorldTemplate {
     private void prepare() {
         int enemySpeed = 1;
         int playerSpeed = 1;
-        if (difficulty > 8) {
+        if (difficulty > 8) { //difficulty kann nicht höher als 8 sein.
             difficulty = 8;
         }
         if (difficulty > 4) { //ab difficulty 5 werden bei jedes zweite Mal spielen. die Geschwindigkeit erhöht.

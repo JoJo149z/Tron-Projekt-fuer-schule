@@ -42,7 +42,7 @@ public class LightCyclesBase extends Actor {
     }
 
     /**
-     * kümmert sich um die Logik beim Besiegen aller Gegner, sowie das Spawnen der Trails, die die Lightcycles hinterlassen.
+     * Kümmert sich um die Logik beim Besiegen aller Gegner, mithilfe von{@link GameManager}, sowie das Spawnen der Trails, die die Lightcycles hinterlassen.
      */
     public void act() {
         if (startAnimation()) {
@@ -88,7 +88,7 @@ public class LightCyclesBase extends Actor {
     }
 
     /**
-     * setzt die Startrotation der Lightcycle, damit sie beim Start die richtige Richtung schauen
+     * Setzt die Startrotation der Lightcycle, damit sie beim Start die richtige Richtung schauen.
      *
      * @param direction as left, down, right, up
      */
@@ -114,7 +114,7 @@ public class LightCyclesBase extends Actor {
     }
 
     /**
-     * kümmert sich um die Animation und Logik bzw. Konsequenzen des Todes von Lightcycles.
+     * Kümmert sich um die Animation und Logik bzw. Konsequenzen des Todes von Lightcycles.
      *
      * @see GameManager#addPunkte(int)
      * @see GameManager#resetLevel(int)
@@ -136,7 +136,7 @@ public class LightCyclesBase extends Actor {
     }
 
     /**
-     * prüft, ob die Lightcycle in der nächsten Bewegung mit einem Trail oder einer Wand kollidieren würde, wenn sie sich in die aktuelle Richtung weiterbewegt.
+     * Prüft, ob die Lightcycles in der nächsten Bewegung mit einem Trail oder einer Wand kollidieren würde, wenn sie sich in die aktuelle Richtung weiterbewegt.
      *
      * @return true, wenn eine Kollision stattfinden würde, false, wenn nicht.
      */

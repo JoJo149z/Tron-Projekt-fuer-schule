@@ -10,19 +10,25 @@ import java.nio.file.Path;
  * Der GameManager steuert den gesamten Spielzustand, einschließlich Punkte,
  * Leben, Levelprogression, Spielmodi sowie Audio- und Reset-Logik.
  * Außerdem verwaltet er den Wechsel zwischen Menüs und Spielwelten.
+ *
  * @author Jonathan
  *
  */
 public class GameManager {
+    private static final GreenfootSound backgroundMusic = new GreenfootSound("gameMusic.wav");
+    private static final GreenfootSound explosion1 = new GreenfootSound("explosion1.wav");
     private static int punkte;
     private static int leben;
     private static int levelGridBugs = 1;
     private static int levelLightCycles = 1;
     private static boolean isLightCyclesCompleted = false;
     private static boolean isGridBugsCompleted = false;
-    private static final GreenfootSound backgroundMusic = new GreenfootSound("gameMusic.wav");
-    private static final GreenfootSound explosion1 = new GreenfootSound("explosion1.wav");
 
+    /**
+     * Reset des Spiels, der alle Werte auf ihre Anfangswerte zurücksetzt.
+     *
+     * @see #softReset()
+     */
     public static void fullReset() {
         punkte = 0;
         levelGridBugs = 1;
@@ -47,11 +53,16 @@ public class GameManager {
                 case 2 -> initialiseGridBugs();
             }
         } else {
-            highscoreScreen(punkte);
+            highscoreScreen();
         }
 
     }
 
+    /**
+     * Startet die Hintergrundmusik, falls sie noch nicht läuft.
+     *
+     * @see #stopMusicLoop()
+     */
     public static void startMusicLoop() {
 
         if (!backgroundMusic.isPlaying()) {
@@ -60,16 +71,30 @@ public class GameManager {
         }
     }
 
+    /**
+     * Stoppt die Hintergrundmusik.
+     *
+     * @see #startMusicLoop()
+     */
     public static void stopMusicLoop() {
         backgroundMusic.stop();
     }
 
+    /**
+     * Spielt ein Explosionsgeräusch ab mit einer bestimmten Lautstärke.
+     *
+     * @param volume In Prozent
+     */
     public static void playExplosion1(int volume) {
         explosion1.play();
         explosion1.setVolume(volume != 0 ? volume : 70);
     }
 
-    public static void highscoreScreen(int punkte) {
+    /**
+     * Kreiert ein Highscore-Screen und updated ihn auch {@link #writeHighscore()}.
+     * Zeigt die Punkte des Spielers, sowie den Highscore an, und startet nach einer kurzen Verzögerung einen {@link #fullReset()}.
+     */
+    public static void highscoreScreen() {
         writeHighscore();
 
         MenuWorld menu = new MenuWorld(false, false);
@@ -81,6 +106,12 @@ public class GameManager {
         fullReset();
     }
 
+    /**
+     * Gibt den in einer datei gespeichertem Highscore zurück.
+     *
+     * @return Highscore
+     * @see #highscoreScreen()
+     */
     public static Integer readHighscore() {
         try {
             return Integer.parseInt(Files.readString(Path.of("highscore")));
@@ -89,6 +120,9 @@ public class GameManager {
         }
     }
 
+    /**
+     * Schreibt den aktuellen Score als Highscore in eine Datei, wenn dieser höher ist.
+     */
     public static void writeHighscore() {
         if (punkte <= readHighscore()) return;
 
@@ -99,12 +133,21 @@ public class GameManager {
         }
     }
 
+    /**
+     * Soft reset für, wenn alle Spiele abgeschlossen sind.
+     *
+     * @see #initialiseLevelSelect()
+     * @see #fullReset()
+     */
     public static void softReset() {
         isLightCyclesCompleted = false;
         isGridBugsCompleted = false;
         GameManager.initialiseLevelSelect();
     }
 
+    /**
+     * Initialisiert den Level Select und die dazugehörende Welt, und führt gegebenenfalls ein {@link #softReset()} durch.
+     */
     public static void initialiseLevelSelect() {
         if (isLightCyclesCompleted && isGridBugsCompleted) {
             softReset();
@@ -112,14 +155,25 @@ public class GameManager {
         Greenfoot.setWorld(new MenuWorld(!isLightCyclesCompleted, !isGridBugsCompleted));
     }
 
+    /**
+     * Initialisiert die LightCycles-Welt mit {@link #levelLightCycles} als Level.
+     */
     public static void initialiseLightCycles() {
         Greenfoot.setWorld(new LightCycles(levelLightCycles));
     }
 
+    /**
+     * Initialisiert die GridBugs-Welt mit {@link #levelGridBugs} als Level
+     */
     public static void initialiseGridBugs() {
         Greenfoot.setWorld(new GridBugs(levelGridBugs));
     }
 
+    /**
+     * Punkte werden um change addiert.
+     *
+     * @param change Die Menge an Punkten die addiert wird.
+     */
     public static void addPunkte(int change) {
         punkte += change;
     }

@@ -2,10 +2,9 @@ import greenfoot.Actor;
 import greenfoot.Greenfoot;
 
 /**
- * Write a description of class levelSelector here.
+ * Der Actor, mit der man die Levelauswahl im Menü steuert.
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author jonathan
  */
 public class LevelSelector extends Actor {
 
@@ -20,8 +19,8 @@ public class LevelSelector extends Actor {
     }
 
     /**
-     * Act - do whatever the levelSelecter wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
+     * Steuert die Levelauswahl im Menü:
+     * a/d zum Drehen und w/Lehrtaste zum Auswählen.
      */
     public void act() {
         if (timer < 10) {
@@ -43,7 +42,7 @@ public class LevelSelector extends Actor {
                 if ("d".equals(key)) {
                     turn(90);
                 }
-                if ("w".equals(key)) {
+                if ("w".equals(key) || "space".equals(key)) {
                     move(100);
 
                     boolean foundObject = !getIntersectingObjects(ImageObject.class).isEmpty();
@@ -56,17 +55,17 @@ public class LevelSelector extends Actor {
                     selectionStarted = true;
 
                 }
-                if ("r".equals(key)) {
-                    GameManager.fullReset();
-                }
             }
         }
     }
 
-    //wenn 50 pixel bewegt dann ImageObject entfernen
+    /**
+     * Animation und Logik hinter dem Selecten an sich.
+     */
     public void select() {
-        if ((getX() <= 60 || (getX() >= 270) || getY() <= 100 || getY() >= 280)) {
+        if ((getX() <= 60 || (getX() >= 270) || getY() <= 100 || getY() >= 280)) { //Wenn am Bild/Punkt angekommen
             Greenfoot.delay(15);
+
             getIntersectingObjects(ImageObject.class).forEach(imageObject -> {
                 switch (imageObject.getImageName()) {
                     case "MenuWorldBluePart.png" -> GameManager.initialiseLightCycles();

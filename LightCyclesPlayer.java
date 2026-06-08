@@ -11,6 +11,7 @@ import greenfoot.Greenfoot;
  */
 public class LightCyclesPlayer extends LightCyclesBase {
     /**
+     * Konstruktor für LightCyclesPlayer.
      *
      * @param speed             != 0
      * @param setStartDirection left, up, down, right
@@ -20,8 +21,8 @@ public class LightCyclesPlayer extends LightCyclesBase {
     }
 
     /**
-     * führt die act Methode von LightCyclesBase aus{@link #LightCyclesBase}, {@link #handelMovement} und {@link #moveCollision} werden hier aufgerufen, damit der Spieler sich bewegen kann und stirbt, wenn er gegen eine Wand oder einen Trail fährt.
-     * wenn er gegen eine Wand fahren würde, bekommt er einen Buffer von ein paar Frames, um sich zu retten, bevor er stirbt.
+     * Führt die act Methode von LightCyclesBase aus{@link #LightCyclesBase}, {@link #handelMovement} und {@link #moveCollision} werden hier aufgerufen, damit der Spieler sich bewegen kann und stirbt, wenn er gegen eine Wand oder einen Trail fährt.
+     * Wenn er gegen eine Wand fahren würde, bekommt er einen Buffer von ein paar Frames, um sich zu retten, bevor er stirbt.
      *
      * @see #handelMovement()
      * @see #moveCollision()
@@ -60,7 +61,7 @@ public class LightCyclesPlayer extends LightCyclesBase {
     }
 
     /**
-     * kümmert sich um die Bewegung bzw. Rotation des Spielers.
+     * Kümmert sich um die Bewegung bzw. Rotation des Spielers.
      */
     @Override
     public void handelMovement() {
