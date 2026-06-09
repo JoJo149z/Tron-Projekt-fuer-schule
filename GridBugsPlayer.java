@@ -128,16 +128,23 @@ public class GridBugsPlayer extends Actor {
                 int mouseX = Greenfoot.getMouseInfo().getX();
                 int mouseY = Greenfoot.getMouseInfo().getY();
                 
+                // Unterschiede zwischen Maus und Spieler
                 int difX = mouseX-getX();
                 int difY = mouseY-getY();
                 
+                // berechnet die Rotation, die die Kugeln haben müssen, um in die richtige Richtung zu schießen
                 int rotation = (int) Math.toDegrees(Math.atan2(difY, difX));
                 
+                // erzeugt die Kugel mit entsprechender Rotation
                 shoot(rotation);
                 
+                // gibt an, dass gerade geschossen wurde, dass im nächsten act nicht direkt
+                // nochmal geschossen werden kann
                 mouseStillDown = true;
             }
         } else{
+            // gibt an, dass in diesem act noch nicht geschossen wurde,
+            // sodass im nächsten act wieder geschossen werden kann
             mouseStillDown = false;
         }
         /**
