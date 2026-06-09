@@ -60,9 +60,9 @@ public class LevelSelector extends Actor {
     }
 
     /**
-     * Animation und Logik hinter dem Selecten an sich.
+     * Animation und Logik hinter dem Select an sich.
      */
-    public void select() {
+    private void select() {
         if ((getX() <= 60 || (getX() >= 270) || getY() <= 100 || getY() >= 280)) { //Wenn am Bild/Punkt angekommen
             Greenfoot.delay(15);
 
