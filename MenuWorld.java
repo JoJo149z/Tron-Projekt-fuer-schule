@@ -1,3 +1,5 @@
+import greenfoot.World;
+
 /**
  * MenuWorld ist eine World, welche so gut wie keine Spiel-UI enthält bis auf eibischen text oben.
  * MenuWorld dient als Startpunkt des Spiels, und wird als World für level Select sowie als Highscore-Screen benutzt.

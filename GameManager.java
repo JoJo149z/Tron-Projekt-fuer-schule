@@ -34,7 +34,6 @@ public class GameManager {
         levelGridBugs = 1;
         leben = 3;
         levelLightCycles = 1;
-        startMusicLoop();
         softReset();
     }
 
