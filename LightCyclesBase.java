@@ -16,13 +16,13 @@ import java.util.List;
  */
 public class LightCyclesBase extends Actor {
 
-    static int enemyAmount;
-    int speed;
-    String farbe;
-    boolean isDead;
-    boolean isEnemy;
-    int timer;
-    int deathBuffer = 0;
+    private static int enemyAmount;
+    protected int speed;
+    private final String farbe;
+    protected boolean isDead;
+    private final boolean isEnemy;
+    private int timer;
+    protected int deathBuffer = 0;
 
     /**
      * Constructor for objects of class LightCyclesBase
@@ -92,7 +92,7 @@ public class LightCyclesBase extends Actor {
      *
      * @param direction as left, down, right, up
      */
-    public void setStartDirection(String direction) {
+    private void setStartDirection(String direction) {
         switch (direction) {
             case "left":
                 setRotation(180);
@@ -110,7 +110,7 @@ public class LightCyclesBase extends Actor {
     }
 
     //handleMovent für Unterklassen
-    public void handelMovement() {
+    protected void handelMovement() {
     }
 
     /**
@@ -119,7 +119,7 @@ public class LightCyclesBase extends Actor {
      * @see GameManager#addPunkte(int)
      * @see GameManager#resetLevel(int)
      */
-    public void death() {
+    protected void death() {
         isDead = true;
         speed = 0;
         GameManager.playExplosion1(0);
