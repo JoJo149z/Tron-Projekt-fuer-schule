@@ -19,6 +19,8 @@ public class GridBugsPlayer extends Actor {
     boolean stillUp = false; // Prüft, ob die obere Pfeiltaste nach Schuss des Spielers noch immer gedrückt ist
     boolean stillLeft = false; // Prüft, ob die linke Pfeiltaste nach Schuss des Spielers noch immer gedrückt ist
 
+    boolean mouseStillDown = false;  // prüft, ob die Maus immernoch gedrückt ist
+    
     int speed = 1; // Geschwindigkeit des Spielers
 
     int leben = 100; // Leben des Spielers
@@ -120,8 +122,29 @@ public class GridBugsPlayer extends Actor {
          * prüft ob Spieler schießen muss und führt den Schuss ggf. aus
          */
 
-
-        if (Greenfoot.isKeyDown("right")) {
+        if (Greenfoot.mousePressed(null)){
+            if(!mouseStillDown){    // damit nur einmal pro Klick geschossen wird
+                // Position der Maus
+                int mouseX = Greenfoot.getMouseInfo().getX();
+                int mouseY = Greenfoot.getMouseInfo().getY();
+                
+                int difX = mouseX-getX();
+                int difY = mouseY-getY();
+                
+                int rotation = (int) Math.toDegrees(Math.atan2(difY, difX));
+                
+                shoot(rotation);
+                
+                mouseStillDown = true;
+            }
+        } else{
+            mouseStillDown = false;
+        }
+        /**
+         * folgender Code könnte auskommentiert werden,
+         * um es zu ermöglichen mit den Pfeiltasten zu schießen
+           */
+        /* if (Greenfoot.isKeyDown("right")) {
             if (!stillRight) {  // prüft, ob Taste erstes mal gedrückt wurde oder im act zuvor auch schon (damit immer nur eine Kugel abgeschossen wird)
                 shoot(0);   // Schuss nach rechts
                 stillRight = true;  // speichert, dass in diesem act geschossen wurde
@@ -152,7 +175,7 @@ public class GridBugsPlayer extends Actor {
             }
         } else {
             stillUp = false;    // speichert, dass in diesem act nicht geschossen wurde
-        }
+        }*/
     }
 
     public void shoot(int rotation) {
