@@ -53,6 +53,7 @@ public class GridBugs extends WorldTemplate {
                 break;
             case 4: 
                 // stellt das Level auf 3 zurück, da es nur 3 Level gibt
+                GameManager.setLevelGridBugs(3);
                 level = 3;
                 addSetupLevel3();
                 break;
