@@ -10,6 +10,8 @@ import greenfoot.Greenfoot;
  * @see #handelMovement()
  */
 public class LightCyclesPlayer extends LightCyclesBase {
+    boolean aDown;
+    boolean dDown;
     /**
      * Konstruktor für LightCyclesPlayer.
      *
@@ -18,6 +20,8 @@ public class LightCyclesPlayer extends LightCyclesBase {
      */
     LightCyclesPlayer(int speed, String setStartDirection) {
         super(speed, false, setStartDirection);
+        aDown = false;
+        dDown = false;
     }
 
     /**
@@ -59,21 +63,24 @@ public class LightCyclesPlayer extends LightCyclesBase {
 
 
     }
-
+    
+    
     /**
      * Kümmert sich um die Bewegung bzw. Rotation des Spielers.
      */
     @Override
     public void handelMovement() {
-        String key = Greenfoot.getKey();
-        if (key != null) {
-            if ("a".equals(key)) {
-                turn(-90);
-            }
-            if ("d".equals(key)) {
-                turn(90);
-            }
+        if (Greenfoot.isKeyDown("a")&&!aDown){
+            turn(-90);
+            aDown=true;
+        } else if (!Greenfoot.isKeyDown("a")) {
+            aDown=false;
         }
-
+        if (Greenfoot.isKeyDown("d")&&!dDown) {
+            turn(90);
+            dDown=true;
+        }else if (!Greenfoot.isKeyDown("d")) {
+            dDown=false;
+        }
     }
 }
